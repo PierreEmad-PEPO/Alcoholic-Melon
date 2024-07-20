@@ -18,7 +18,7 @@ public class Tap : MonoBehaviour
     {
         get 
         {
-            return (transform.localEulerAngles.x - minRotDeg) / maxRotDeg * pourFactor;
+            return (transform.localEulerAngles.x - minRotDeg) / (maxRotDeg - minRotDeg) * pourFactor;
         }
     }
 
@@ -34,8 +34,11 @@ public class Tap : MonoBehaviour
         if (isRotated && transform.localEulerAngles.x > minRotDeg)
         {
             
+
             transform.Rotate(-Vector3.right * (rotateBack * Time.deltaTime ) );
-            if (transform.localEulerAngles.x < minRotDeg) // if arrived
+   
+            if (transform.localEulerAngles.x < minRotDeg || transform.localEulerAngles.x > maxRotDeg) // if arrived
+
             { 
                 transform.localEulerAngles = Vector3.right * minRotDeg;
                 isRotated = false;
