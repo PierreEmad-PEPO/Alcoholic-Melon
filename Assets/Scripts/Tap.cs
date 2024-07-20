@@ -22,23 +22,24 @@ public class Tap : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        if (minRotDeg < 1) minRotDeg = 1;
         transform.localEulerAngles = new Vector3(minRotDeg, 0, 0);
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (isRotated && transform.rotation.x > minRotDeg)
-        { 
+        if (isRotated && transform.localEulerAngles.x > minRotDeg)
+        {
+            
             transform.Rotate(-Vector3.right * (rotationSpeed / 2));
-            if (transform.rotation.x < minRotDeg) // if arrived
-            {
-                Quaternion q = transform.rotation;
-                q.x = minRotDeg;
-                transform.rotation = q;
+            if (transform.localEulerAngles.x < minRotDeg) // if arrived
+            { 
+                transform.localEulerAngles = Vector3.right * minRotDeg;
+                isRotated = false;
             }
         }
-        
+
     }
 
     private void OnMouseDrag()
