@@ -9,6 +9,8 @@ public class Tap : MonoBehaviour
     [SerializeField] float pourFactor;
     [SerializeField] float rotationSpeed;
 
+    bool isRotated = false ;
+
     public float PourValue
     {
         get 
@@ -26,6 +28,16 @@ public class Tap : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (isRotated && transform.rotation.x > minRotDeg)
+        { 
+            transform.Rotate(-Vector3.right * (rotationSpeed / 2));
+            if (transform.rotation.x < minRotDeg) // if arrived
+            {
+                Quaternion q = transform.rotation;
+                q.x = minRotDeg;
+                transform.rotation = q;
+            }
+        }
         
     }
 
@@ -35,6 +47,12 @@ public class Tap : MonoBehaviour
         if (transform.localEulerAngles.x + rot > minRotDeg && transform.localEulerAngles.x + rot < maxRotDeg)
             transform.Rotate(rot, 0, 0);
 
-        Debug.Log(transform.gameObject.name + " " + PourValue + "%");
+        //Debug.Log(transform.gameObject.name + " " + PourValue + "%");
+        isRotated = false;
+    }
+
+    private void OnMouseUp()
+    {
+        isRotated = true;   
     }
 }
