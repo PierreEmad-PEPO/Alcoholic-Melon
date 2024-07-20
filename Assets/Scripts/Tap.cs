@@ -1,16 +1,19 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.IO;
 using UnityEngine;
 
 public class Tap : MonoBehaviour
 {
-    [SerializeField] Color color;
-    [SerializeField] float minRotDeg, maxRotDeg;
-    [SerializeField] float pourFactor;
-    [SerializeField] float rotationSpeed;
-
-    bool isRotated = false ;
-
+    [SerializeField] public Color color;
+    [SerializeField] private float minRotDeg, maxRotDeg;
+    [SerializeField] private float pourFactor;
+    [SerializeField] private float rotationSpeed;
+    private float rotateBack = 50f;
+    private CupColorManager cupColorManager;
+    private bool isRotated = false ;
+    private bool isPouring = false;
     public float PourValue
     {
         get 
@@ -19,29 +22,46 @@ public class Tap : MonoBehaviour
         }
     }
 
-    // Start is called before the first frame update
-    void Start()
+    private void Start()
     {
+        cupColorManager = FindObjectOfType<CupColorManager>();
         if (minRotDeg < 1) minRotDeg = 1;
         transform.localEulerAngles = new Vector3(minRotDeg, 0, 0);
     }
 
-    // Update is called once per frame
-    void Update()
+    private void Update()
     {
         if (isRotated && transform.localEulerAngles.x > minRotDeg)
         {
             
-            transform.Rotate(-Vector3.right * (rotationSpeed / 2));
+
+            transform.Rotate(-Vector3.right * (rotateBack * Time.deltaTime ) );
+   
             if (transform.localEulerAngles.x < minRotDeg || transform.localEulerAngles.x > maxRotDeg) // if arrived
+
             { 
                 transform.localEulerAngles = Vector3.right * minRotDeg;
                 isRotated = false;
+                cupColorManager.StopPour(color);
             }
+            isPouring = false;
+
+        }
+        if (!isRotated && transform.localEulerAngles.x > minRotDeg)
+        {
+            StartCoroutine(Pour());
+            isPouring = true;
         }
 
     }
-
+    private IEnumerator Pour()
+    {
+        while (isPouring)
+        {
+            cupColorManager.StartPour(color, PourValue);
+            yield return null;
+        }
+    }
     private void OnMouseDrag()
     {
         float rot = -Input.GetAxis("Mouse Y") * rotationSpeed;
@@ -50,10 +70,12 @@ public class Tap : MonoBehaviour
 
         //Debug.Log(transform.gameObject.name + " " + PourValue + "%");
         isRotated = false;
+        isPouring = true;
     }
 
     private void OnMouseUp()
     {
-        isRotated = true;   
+        isRotated = true;
+        isPouring = false;
     }
 }
