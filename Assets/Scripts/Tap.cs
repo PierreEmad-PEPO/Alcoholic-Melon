@@ -15,7 +15,7 @@ public class Tap : MonoBehaviour
     {
         get 
         {
-            return (transform.localEulerAngles.x - minRotDeg) / maxRotDeg * pourFactor;
+            return (transform.localEulerAngles.x - minRotDeg) / (maxRotDeg - minRotDeg) * pourFactor;
         }
     }
 
