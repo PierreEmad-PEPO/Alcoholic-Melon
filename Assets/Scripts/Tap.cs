@@ -11,7 +11,7 @@ public class Tap : MonoBehaviour
     [SerializeField] private GameObject pourFlowPrefab;
     [SerializeField] private GameObject bubblesPrefab;
     [SerializeField] private Transform cupTransform;
-
+    [SerializeField] private AudioClip[] handleSounds;
     private float rotateBack = 200f;
     //private CupColorManager cupColorManager;
     private bool isRotated = false;
