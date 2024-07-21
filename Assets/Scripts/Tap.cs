@@ -10,7 +10,7 @@ public class Tap : MonoBehaviour
     [SerializeField] private float minRotDeg, maxRotDeg;
     [SerializeField] private float pourFactor;
     [SerializeField] private float rotationSpeed;
-    private float rotateBack = 50f;
+    private float rotateBack = 200f;
     private CupColorManager cupColorManager;
     private bool isRotated = false ;
     private bool isPouring = false;
@@ -49,17 +49,16 @@ public class Tap : MonoBehaviour
         }
         if (!isRotated && transform.localEulerAngles.x > minRotDeg)
         {
-            StartCoroutine(Pour());
+            Pour();
             isPouring = true;
         }
 
     }
-    private IEnumerator Pour()
+    private void Pour()
     {
-        while (isPouring)
+        if (isPouring)
         {
             cupColorManager.StartPour(color, PourValue);
-            yield return null;
         }
     }
     private void OnMouseDrag()
