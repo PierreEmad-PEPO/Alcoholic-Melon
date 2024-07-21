@@ -11,7 +11,7 @@ public class CupColorManager : MonoBehaviour
     private Color currentColor;
     private Dictionary<Color, float> colorPullTimes = new Dictionary<Color, float>();
 
-    private float lerpDuration = 3f;
+    private float lerpDuration = 1f;
 
     void Start()
     {
@@ -36,7 +36,7 @@ public class CupColorManager : MonoBehaviour
                 Color targetColor = colorTime.Key;
                 float pullTime = colorTime.Value;
 
-                currentColor = Color.Lerp(currentColor, targetColor, (pullTime / totalPullTime) * Time.deltaTime / lerpDuration);
+                currentColor = Color.Lerp(currentColor, targetColor, (pullTime / totalPullTime) / lerpDuration);
             }
         }
 
