@@ -32,10 +32,7 @@ public class Tap : MonoBehaviour
 
     public float RemainingPercentage
     {
-        get 
-        {
-            return 100f;
-        }
+        get; set;
     }
 
     public bool IsPouring { get { return isPouring; } }

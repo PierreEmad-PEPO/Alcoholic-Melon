@@ -19,7 +19,7 @@ public class Customer : MonoBehaviour
     Drink drink;
     string firstSentence = "";
     string secondSentence = "";
-
+    
     bool isNotArrive = false;
     bool isRotate = false;
 
@@ -34,6 +34,18 @@ public class Customer : MonoBehaviour
     }
     private void OnMouseDown()
     {
+        Events.OnplayerClickOncustomer.Invoke(Drink, this);
+    }
+
+    public void Judge(string text)
+    {
+        this.text.text = text;
+        StartCoroutine(Wit());
+    }
+
+    IEnumerator Wit()
+    {
+        yield return new WaitForSeconds(5);
         startRotate();
     }
 

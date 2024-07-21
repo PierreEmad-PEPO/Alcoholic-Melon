@@ -9,11 +9,14 @@ public class CustomerGenerator : MonoBehaviour
     GameObject customerPrefab;
     [SerializeField]
     List<Transform > customerStandPos;
-    [SerializeField]
-    string[] firstSentences;
-    [SerializeField]
-    string[] secondSentences;
+
     Dictionary<DrinkName,Drink> drinks;
+
+    public string[] firstSentences;
+    public string[] secondSentences;
+    public string[] likedSentences;
+    public string[] hulfLikedSentences;
+    public string[] unLikedSentences;
 
     // Start is called before the first frame update
     void Start()
@@ -56,23 +59,23 @@ public class CustomerGenerator : MonoBehaviour
         drinks = new Dictionary<DrinkName, Drink>();
         Drink drink = new Drink(DrinkName.bbb,
            new Dictionary<TapName, float>() {
-                { TapName.a, 25f},
-                {TapName.e, 75f }
+                { TapName.Red, 25f},
+                {TapName.Green, 75f }
            });
 
         drinks.Add(drink.name, drink);
 
         drink = new Drink(DrinkName.ccc,
             new Dictionary<TapName, float>() {
-                { TapName.b, 50f},
-                {TapName.c, 50f }
+                { TapName.Red, 50f},
+                {TapName.Green, 50f }
             });
         drinks.Add(drink.name, drink);
 
         drink = new Drink(DrinkName.aaa,
            new Dictionary<TapName, float>() {
-                { TapName.c, 60f},
-                {TapName.e, 40f }
+                { TapName.Red, 60f},
+                {TapName.Green, 40f }
            });
         drinks.Add(drink.name, drink);
     }

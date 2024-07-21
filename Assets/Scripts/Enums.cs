@@ -13,9 +13,7 @@ public enum DrinkName
 
 public enum TapName
 {
-    a,
-    b,
-    c,
-    d,
-    e
+   Red,
+   Green,
+   Blue,
 }
