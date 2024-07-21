@@ -36,6 +36,7 @@ public class Cup : MonoBehaviour
 
             liquidRend.material.SetVector("_ClippingPosition", CurrentPourPoint - bottom.up * 0.02f);
             colorManager.StartPour(currentTap.color, currentTap.PourValue);
+            
         }
         else colorManager.StopPour(currentTap.color);
     }

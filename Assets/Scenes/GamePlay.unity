@@ -1082,6 +1082,11 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1000642677}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!82 &1553883495 stripped
+AudioSource:
+  m_CorrespondingSourceObject: {fileID: 8569408248099110034, guid: b7e2e42c88ae2414484cfabec2d9fdc5, type: 3}
+  m_PrefabInstance: {fileID: 1559734120179206779}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1577109419
 GameObject:
   m_ObjectHideFlags: 0
@@ -1237,6 +1242,10 @@ PrefabInstance:
     - target: {fileID: 7400785381633066216, guid: b7e2e42c88ae2414484cfabec2d9fdc5, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8569408248099110034, guid: b7e2e42c88ae2414484cfabec2d9fdc5, type: 3}
+      propertyPath: m_audioClip
+      value: 
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -1500,6 +1509,10 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4617993664325565154, guid: 0cfde0ea7b81fbf43832d09e46ca726d, type: 3}
+      propertyPath: audioSource
+      value: 
+      objectReference: {fileID: 1553883495}
+    - target: {fileID: 4617993664325565154, guid: 0cfde0ea7b81fbf43832d09e46ca726d, type: 3}
       propertyPath: handleSounds.Array.size
       value: 2
       objectReference: {fileID: 0}
@@ -1511,6 +1524,10 @@ PrefabInstance:
       propertyPath: handleSounds.Array.data[1]
       value: 
       objectReference: {fileID: 8300000, guid: db0b7aa80a5d75945b349027b5640e83, type: 3}
+    - target: {fileID: 4731409304521166871, guid: 0cfde0ea7b81fbf43832d09e46ca726d, type: 3}
+      propertyPath: audioSource
+      value: 
+      objectReference: {fileID: 1553883495}
     - target: {fileID: 4731409304521166871, guid: 0cfde0ea7b81fbf43832d09e46ca726d, type: 3}
       propertyPath: handleSounds.Array.size
       value: 2
@@ -1527,6 +1544,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: machine
       objectReference: {fileID: 0}
+    - target: {fileID: 7872466379501235511, guid: 0cfde0ea7b81fbf43832d09e46ca726d, type: 3}
+      propertyPath: audioSource
+      value: 
+      objectReference: {fileID: 1553883495}
     - target: {fileID: 7872466379501235511, guid: 0cfde0ea7b81fbf43832d09e46ca726d, type: 3}
       propertyPath: handleSounds.Array.size
       value: 2
