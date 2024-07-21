@@ -13,17 +13,19 @@ public class Cup : MonoBehaviour
     [SerializeField] private float quantity;
     private float height;
 
+    private CupColorManager colorManager;
     public Vector3 CurrentPourPoint { get { return bottom.position + quantity/100 * height * bottom.up; } }
 
-    // Start is called before the first frame update
+    
     void Start()
     {
+        colorManager = FindObjectOfType<CupColorManager>();
         quantity = 0;
         height = top.position.y - bottom.position.y;
         SetCurrentTap(currentTap);
     }
 
-    // Update is called once per frame
+    
     void Update()
     {
         if (currentTap.IsPouring)
@@ -32,7 +34,10 @@ public class Cup : MonoBehaviour
             quantity = Mathf.Clamp(quantity, 0, 100);
 
             liquidRend.material.SetVector("_ClippingPosition", CurrentPourPoint - bottom.up * 0.02f);
+            colorManager.StartPour(currentTap.color, currentTap.PourValue);
         }
+        else colorManager.StopPour(currentTap.color);
+        
     }
 
     public void SetCurrentTap(Tap newTap)
