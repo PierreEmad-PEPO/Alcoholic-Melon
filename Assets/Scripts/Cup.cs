@@ -9,6 +9,7 @@ public class Cup : MonoBehaviour
     [SerializeField] private float fillingSpeed;
     [SerializeField] private Transform top, bottom;
     [SerializeField] private Renderer liquidRend;
+    [SerializeField] private Judgement judgement;
 
     [SerializeField] private Tap currentTap;
     [SerializeField] private float quantity;
@@ -138,7 +139,7 @@ public class Cup : MonoBehaviour
 
     void ResetCup()
     {
-        Camera.main.GetComponent<CameraFocus>().MoveToStart(correct, wrong);
+        judgement.Judge(correct, wrong);
         quantity = 0;
         quantityOverflow = 0;
         correct = wrong = 0;

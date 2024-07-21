@@ -22,6 +22,7 @@ public class Customer : MonoBehaviour
     
     bool isNotArrive = false;
     bool isRotate = false;
+    bool once = false;
 
     Action actionAfterArrived;
 
@@ -34,7 +35,11 @@ public class Customer : MonoBehaviour
     }
     private void OnMouseDown()
     {
-        Events.OnplayerClickOncustomer.Invoke(Drink, this);
+        if (!once)
+        {
+            Events.OnplayerClickOncustomer.Invoke(Drink, this);
+            once = true;
+        }
     }
 
     public void Judge(string text)
