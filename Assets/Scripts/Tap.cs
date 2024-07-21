@@ -20,7 +20,7 @@ public class Tap : MonoBehaviour
     private Transform bubblesTransform;
     public float PourValue { get { return (transform.localEulerAngles.x - minRotDeg) / (maxRotDeg - minRotDeg) * pourFactor; } }
 
-    public float RemainingPercentage { get { return 100f; } }
+    public float RemainingPercentage { get; set; }
 
     public bool IsPouring { get { return isPouring; } }
 

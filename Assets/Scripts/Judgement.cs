@@ -30,12 +30,12 @@ public class Judgement : MonoBehaviour
     {
         foreach (var tap in taps) 
         {
-/*            if (drink.ingredients.ContainsKey(tap.Key))
+            if (drink.ingredients.ContainsKey(tap.Key))
             {
                 tap.Value.RemainingPercentage = drink.ingredients[tap.Key];
             }
             else
-                tap.Value.RemainingPercentage = 0f;*/
+                tap.Value.RemainingPercentage = 0f;
         }
     }
 }
