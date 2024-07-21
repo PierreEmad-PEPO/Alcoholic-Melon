@@ -1,7 +1,3 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.IO;
 using UnityEngine;
 
 public class Tap : MonoBehaviour
@@ -16,27 +12,15 @@ public class Tap : MonoBehaviour
     [SerializeField] private Transform cupTransform;
 
     private float rotateBack = 200f;
-    private CupColorManager cupColorManager;
+    //private CupColorManager cupColorManager;
     private bool isRotated = false ;
     private bool isPouring = false;
     private GameObject pourFlow;
     private GameObject bubbles;
     private Transform bubblesTransform;
-    public float PourValue
-    {
-        get 
-        {
-            return (transform.localEulerAngles.x - minRotDeg) / (maxRotDeg - minRotDeg) * pourFactor;
-        }
-    }
+    public float PourValue { get { return (transform.localEulerAngles.x - minRotDeg) / (maxRotDeg - minRotDeg) * pourFactor; }}
 
-    public float RemainingPercentage
-    {
-        get 
-        {
-            return 100f;
-        }
-    }
+    public float RemainingPercentage { get { return 100f; } }
 
     public bool IsPouring { get { return isPouring; } }
 
@@ -45,7 +29,7 @@ public class Tap : MonoBehaviour
     private void Start()
     {
         bubblesTransform = GameObject.Find("bottom").transform;
-        cupColorManager = FindObjectOfType<CupColorManager>();
+        //cupColorManager = FindObjectOfType<CupColorManager>();
         if (minRotDeg < 1) minRotDeg = 1;
         transform.localEulerAngles = new Vector3(minRotDeg, 0, 0);
     }
@@ -56,21 +40,22 @@ public class Tap : MonoBehaviour
         {
             
 
-            transform.Rotate(-Vector3.right * (rotateBack * Time.deltaTime ) );
+            transform.Rotate(-Vector3.right * (rotateBack * Time.deltaTime ));
    
             if (transform.localEulerAngles.x < minRotDeg || transform.localEulerAngles.x > maxRotDeg) // if arrived
 
             { 
                 transform.localEulerAngles = Vector3.right * minRotDeg;
                 isRotated = false;
-                cupColorManager.StopPour(color);
+                isPouring = false;
+                //cupColorManager.StopPour(color);
             }
-            isPouring = false;
+           
 
         }
         if (!isRotated && transform.localEulerAngles.x > minRotDeg)
         {
-            Pour();
+            //Pour();
             pourFlow.GetComponent<ParticleSystem>().emissionRate = 10 + (300 - 10) * (PourValue / 100);
             isPouring = true;
         }
@@ -80,7 +65,7 @@ public class Tap : MonoBehaviour
     {
         if (isPouring)
         {
-            cupColorManager.StartPour(color, PourValue);
+            //cupColorManager.StartPour(color, PourValue);
         }
     }
 
