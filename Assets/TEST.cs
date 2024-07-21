@@ -4,22 +4,25 @@ using UnityEngine;
 
 public class TEST : MonoBehaviour
 {
-    MeshRenderer MeshRenderer;
+    [SerializeField] Transform lmt;
+    [SerializeField] Renderer rend;
+    [SerializeField] float speed;
+    Vector3 lmt2;
 
     // Start is called before the first frame update
     void Start()
     {
-        MeshRenderer = GetComponent<MeshRenderer>();
+        
     }
 
     // Update is called once per frame
     void Update()
     {
-        
-    }
-
-    public void AddColor(Color color)
-    {
-
+        if (Input.GetKey(KeyCode.Space)) 
+        {
+            lmt.Translate(-lmt.up * speed * Time.deltaTime);
+            lmt2 = lmt.position;
+            rend.material.SetVector("_ClippingPosition", lmt2);
+        }
     }
 }
