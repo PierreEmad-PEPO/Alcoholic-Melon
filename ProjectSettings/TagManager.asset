@@ -5,6 +5,9 @@ TagManager:
   serializedVersion: 2
   tags:
   - Glass
+  - Red
+  - Green
+  - Blue
   layers:
   - Default
   - TransparentFX

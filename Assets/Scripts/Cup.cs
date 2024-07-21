@@ -31,19 +31,28 @@ public class Cup : MonoBehaviour
         if (currentTap.IsPouring)
         {
             quantity += currentTap.PourValue/100 * fillingSpeed * Time.deltaTime;
+            currentTap.RemainingPercentage -= currentTap.PourValue / 100 * fillingSpeed * Time.deltaTime;
             quantity = Mathf.Clamp(quantity, 0, 100);
 
             liquidRend.material.SetVector("_ClippingPosition", CurrentPourPoint - bottom.up * 0.02f);
             colorManager.StartPour(currentTap.color, currentTap.PourValue);
         }
         else colorManager.StopPour(currentTap.color);
-        
     }
 
     public void SetCurrentTap(Tap newTap)
     {
+        Debug.Log(currentTap.RemainingPercentage);
         currentTap = newTap;
-        checkArea.transform.position = bottom.position + bottom.up * currentTap.RemainingPercentage/100 * height;
+
+        if (currentTap.RemainingPercentage > 0)
+        {
+            checkArea.transform.position = CurrentPourPoint + bottom.up * currentTap.RemainingPercentage / 100 * height;
+        }
+        else
+        {
+            checkArea.transform.position = Vector3.one * 1000;
+        }
     }
 
     public void UpdateCurrentTap()

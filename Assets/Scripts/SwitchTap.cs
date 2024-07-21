@@ -18,13 +18,19 @@ public class SwitchTap : MonoBehaviour
         Vector3 mouse = Input.mousePosition;
         mouse.z = Vector3.Distance(Camera.main.transform.position, red.position);
         transform.position = Camera.main.ScreenToWorldPoint(mouse);
+        string curTag = transform.tag;
         Transform nearest = GetMinDis();
         if (Vector3.Distance(transform.position, nearest.position) < 0.7f)
         {
             transform.position = nearest.position;
-            GetComponent<Cup>().SetCurrentTap(nearest.parent.GetChild(0).GetComponent<Tap>());
+            if (!transform.CompareTag(nearest.tag)) 
+            {
+                GetComponent<Cup>().SetCurrentTap(nearest.parent.GetChild(0).GetComponent<Tap>());
+                transform.tag = nearest.tag;
+            }
         }
     }
+
 
     Transform GetMinDis()
     {

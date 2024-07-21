@@ -1,3 +1,4 @@
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class Tap : MonoBehaviour
@@ -26,6 +27,11 @@ public class Tap : MonoBehaviour
 
     public GameObject Bubbles { get { return bubbles; } }
 
+    private void Awake()
+    {
+        RemainingPercentage = 0;
+    }
+
     private void Start()
     {
         bubblesTransform = GameObject.Find("bottom").transform;
@@ -33,6 +39,7 @@ public class Tap : MonoBehaviour
         if (minRotDeg < 1) minRotDeg = 1;
         transform.localEulerAngles = new Vector3(minRotDeg, 0, 0);
     }
+
 
     private void Update()
     {
