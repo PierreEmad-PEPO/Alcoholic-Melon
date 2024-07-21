@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.12731741, g: 0.13414758, b: 0.121078804, a: 1}
+  m_IndirectSpecularColor: {r: 0.12731749, g: 0.13414754, b: 0.12107867, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -623,8 +623,10 @@ MonoBehaviour:
   pourFlowPrefab: {fileID: 7533336762438628531, guid: 31c2dd5a706ea7e48ac0286f2e255ce2, type: 3}
   bubblesPrefab: {fileID: 2417210899945139552, guid: ff16a96d768a1644db9168f5b0f7bf65, type: 3}
   cupTransform: {fileID: 1372929293}
-  audioSource: {fileID: 0}
-  handleSounds: []
+  audioSource: {fileID: 1054856975}
+  handleSounds:
+  - {fileID: 8300000, guid: db4f3c500e5353545b76f7bc12b5c24a, type: 3}
+  - {fileID: 8300000, guid: 7b3a89c87973d8b448d801a6a9d9c5d4, type: 3}
   cup: {fileID: 1000642678}
 --- !u!65 &514167109
 BoxCollider:
@@ -1213,6 +1215,68 @@ MonoBehaviour:
   greenTap: {fileID: 1109295944}
   blueTap: {fileID: 514167108}
   cupRenderer: {fileID: 105442842}
+--- !u!1001 &1054856974
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 2118674887934558161, guid: b7e2e42c88ae2414484cfabec2d9fdc5, type: 3}
+      propertyPath: m_Name
+      value: SoundManager
+      objectReference: {fileID: 0}
+    - target: {fileID: 7400785381633066216, guid: b7e2e42c88ae2414484cfabec2d9fdc5, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -1.1312724
+      objectReference: {fileID: 0}
+    - target: {fileID: 7400785381633066216, guid: b7e2e42c88ae2414484cfabec2d9fdc5, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -7.3365884
+      objectReference: {fileID: 0}
+    - target: {fileID: 7400785381633066216, guid: b7e2e42c88ae2414484cfabec2d9fdc5, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -25.173193
+      objectReference: {fileID: 0}
+    - target: {fileID: 7400785381633066216, guid: b7e2e42c88ae2414484cfabec2d9fdc5, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7400785381633066216, guid: b7e2e42c88ae2414484cfabec2d9fdc5, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7400785381633066216, guid: b7e2e42c88ae2414484cfabec2d9fdc5, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7400785381633066216, guid: b7e2e42c88ae2414484cfabec2d9fdc5, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7400785381633066216, guid: b7e2e42c88ae2414484cfabec2d9fdc5, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7400785381633066216, guid: b7e2e42c88ae2414484cfabec2d9fdc5, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7400785381633066216, guid: b7e2e42c88ae2414484cfabec2d9fdc5, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: b7e2e42c88ae2414484cfabec2d9fdc5, type: 3}
+--- !u!82 &1054856975 stripped
+AudioSource:
+  m_CorrespondingSourceObject: {fileID: 8569408248099110034, guid: b7e2e42c88ae2414484cfabec2d9fdc5, type: 3}
+  m_PrefabInstance: {fileID: 1054856974}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1092037707
 GameObject:
   m_ObjectHideFlags: 0
@@ -1323,8 +1387,10 @@ MonoBehaviour:
   pourFlowPrefab: {fileID: 7533336762438628531, guid: 31c2dd5a706ea7e48ac0286f2e255ce2, type: 3}
   bubblesPrefab: {fileID: 2417210899945139552, guid: ff16a96d768a1644db9168f5b0f7bf65, type: 3}
   cupTransform: {fileID: 1872411638}
-  audioSource: {fileID: 0}
-  handleSounds: []
+  audioSource: {fileID: 1054856975}
+  handleSounds:
+  - {fileID: 8300000, guid: de3a7a68a0403fc4c9f48c4590bcae85, type: 3}
+  - {fileID: 8300000, guid: db0b7aa80a5d75945b349027b5640e83, type: 3}
   cup: {fileID: 1000642678}
 --- !u!65 &1109295945
 BoxCollider:
@@ -1547,8 +1613,10 @@ MonoBehaviour:
   pourFlowPrefab: {fileID: 7533336762438628531, guid: 31c2dd5a706ea7e48ac0286f2e255ce2, type: 3}
   bubblesPrefab: {fileID: 2417210899945139552, guid: ff16a96d768a1644db9168f5b0f7bf65, type: 3}
   cupTransform: {fileID: 44053015}
-  audioSource: {fileID: 0}
-  handleSounds: []
+  audioSource: {fileID: 1054856975}
+  handleSounds:
+  - {fileID: 8300000, guid: b73a0ce1e007a4848a8cbd336d9a8d9d, type: 3}
+  - {fileID: 8300000, guid: b5968813a2dcd5a41be4555e1d6d0eca, type: 3}
   cup: {fileID: 1000642678}
 --- !u!65 &1330919043
 BoxCollider:
@@ -2220,3 +2288,4 @@ SceneRoots:
   - {fileID: 1852415841}
   - {fileID: 1452853173}
   - {fileID: 264516815}
+  - {fileID: 1054856974}
