@@ -20,6 +20,7 @@ public class CustomerGenerator : MonoBehaviour
     {
         Events.onCustomerGoen.AddListener(AddTransfom);
         AddDrinks();
+        GenerateCustomer();
         StartCoroutine(TryGenerateCustomer());
     }
 
@@ -29,21 +30,25 @@ public class CustomerGenerator : MonoBehaviour
         {
             float witeTime = UnityEngine.Random.Range(5f, 10f);
             yield return new WaitForSeconds(witeTime);
-            DrinkName randomDrink = (DrinkName)UnityEngine.Random.Range(0, Enum.GetValues(typeof(DrinkName)).Length);
-            if (customerStandPos.Count > 0 && drinks.ContainsKey(randomDrink))
-            {
-                Customer customer = Instantiate(customerPrefab).GetComponent<Customer>();
-                int randomPosIndex = UnityEngine.Random.Range(0, customerStandPos.Count);
-                string fs = firstSentences[UnityEngine.Random.Range(0, firstSentences.Length)];
-                string sec = secondSentences[UnityEngine.Random.Range(0, secondSentences.Length)];
-                //Debug.Log(customerStandPos.Count + "  " + customerStandPos[randomPosIndex].position);
-                customer.intiCustomer(customerStandPos[randomPosIndex], drinks[randomDrink], fs, sec);
-                customerStandPos.RemoveAt(randomPosIndex);
-                
-            }
+           GenerateCustomer();
         }
     }
 
+    void GenerateCustomer()
+    {
+        DrinkName randomDrink = (DrinkName)UnityEngine.Random.Range(0, Enum.GetValues(typeof(DrinkName)).Length);
+        if (customerStandPos.Count > 0 && drinks.ContainsKey(randomDrink))
+        {
+            Customer customer = Instantiate(customerPrefab).GetComponent<Customer>();
+            int randomPosIndex = UnityEngine.Random.Range(0, customerStandPos.Count);
+            string fs = firstSentences[UnityEngine.Random.Range(0, firstSentences.Length)];
+            string sec = secondSentences[UnityEngine.Random.Range(0, secondSentences.Length)];
+            //Debug.Log(customerStandPos.Count + "  " + customerStandPos[randomPosIndex].position);
+            customer.intiCustomer(customerStandPos[randomPosIndex], drinks[randomDrink], fs, sec);
+            customerStandPos.RemoveAt(randomPosIndex);
+
+        }
+    }
     public void AddTransfom(Transform t)
     {
         Debug.Log(transform.position);
@@ -52,9 +57,16 @@ public class CustomerGenerator : MonoBehaviour
 
     void AddDrinks()
     {
-        
         drinks = new Dictionary<DrinkName, Drink>();
-        Drink drink = new Drink(DrinkName.bbb,
+
+         Drink drink = new Drink(DrinkName.aaa,
+           new Dictionary<TapName, float>() {
+                { TapName.Red, 60f},
+                {TapName.Green, 40f }
+           });
+        drinks.Add(drink.name, drink);
+        
+        drink = new Drink(DrinkName.bbb,
            new Dictionary<TapName, float>() {
                 { TapName.Red, 25f},
                 {TapName.Green, 75f }
@@ -69,12 +81,14 @@ public class CustomerGenerator : MonoBehaviour
             });
         drinks.Add(drink.name, drink);
 
-        drink = new Drink(DrinkName.aaa,
-           new Dictionary<TapName, float>() {
-                { TapName.Red, 60f},
-                {TapName.Green, 40f }
-           });
+       drink = new Drink(DrinkName.ddd,
+            new Dictionary<TapName, float>() {
+                {TapName.Red, 50f},
+                {TapName.Green, 25f },
+                {TapName.Blue, 25f }
+            });
         drinks.Add(drink.name, drink);
+
     }
 
 }
