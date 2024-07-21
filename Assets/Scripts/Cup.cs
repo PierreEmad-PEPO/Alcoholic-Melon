@@ -144,6 +144,7 @@ public class Cup : MonoBehaviour
         quantityOverflow = 0;
         correct = wrong = 0;
         checkArea.transform.position = Vector3.one * 1000;
+        liquidRend.material.SetVector("_ClippingPosition", CurrentPourPoint - bottom.up * 200f);
     }
 
     void OnDrawGizmos()
