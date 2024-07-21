@@ -14,9 +14,6 @@ public class CustomerGenerator : MonoBehaviour
 
     public string[] firstSentences;
     public string[] secondSentences;
-    public string[] likedSentences;
-    public string[] hulfLikedSentences;
-    public string[] unLikedSentences;
 
     // Start is called before the first frame update
     void Start()
