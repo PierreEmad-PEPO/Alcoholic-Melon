@@ -54,7 +54,6 @@ public class CupColorManager : MonoBehaviour
         if (colorPullTimes.ContainsKey(color))
         {
             colorPullTimes[color] += pourValue * Time.deltaTime;
-            //Debug.Log("pouring");
         }
        
     }
@@ -65,7 +64,6 @@ public class CupColorManager : MonoBehaviour
         if (colorPullTimes.ContainsKey(color))
         {
             colorPullTimes[color] = Mathf.Max(0, colorPullTimes[color] - Time.deltaTime);
-            //Debug.Log("Stopped pouring color");
         }
        
     }
