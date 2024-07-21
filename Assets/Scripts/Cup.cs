@@ -22,7 +22,7 @@ public class Cup : MonoBehaviour
         colorManager = FindObjectOfType<CupColorManager>();
         quantity = 0;
         height = top.position.y - bottom.position.y;
-        SetCurrentTap(currentTap);
+        UpdateCurrentTap();
     }
 
     
@@ -44,5 +44,10 @@ public class Cup : MonoBehaviour
     {
         currentTap = newTap;
         checkArea.transform.position = bottom.position + bottom.up * currentTap.RemainingPercentage/100 * height;
+    }
+
+    public void UpdateCurrentTap()
+    {
+        SetCurrentTap(currentTap);
     }
 }
