@@ -16,7 +16,7 @@ public class SwitchTap : MonoBehaviour
     private void OnMouseDrag()
     {
         Vector3 mouse = Input.mousePosition;
-        mouse.z = red.position.z;
+        mouse.z = Vector3.Distance(Camera.main.transform.position, red.position);
         transform.position = Camera.main.ScreenToWorldPoint(mouse);
         Transform nearest = GetMinDis();
         if (Vector3.Distance(transform.position, nearest.position) < 0.7f)
