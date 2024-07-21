@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 7878714937099143453}
   - component: {fileID: 5631789783934642594}
   - component: {fileID: 729521316468286650}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: LiquidPouring
   m_TagString: Untagged
   m_Icon: {fileID: 0}
