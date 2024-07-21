@@ -11,11 +11,11 @@ public class Tap : MonoBehaviour
     [SerializeField] private GameObject pourFlowPrefab;
     [SerializeField] private GameObject bubblesPrefab;
     [SerializeField] private Transform cupTransform;
+    [SerializeField] private AudioSource audioSource;
     [SerializeField] private AudioClip[] handleSounds;
     [SerializeField] private Cup cup;
 
     private float rotateBack = 200f;
-    //private CupColorManager cupColorManager;
     private bool isRotated = false;
     private bool isPouring = false;
     private GameObject pourFlow;
@@ -37,7 +37,6 @@ public class Tap : MonoBehaviour
     private void Start()
     {
         bubblesTransform = GameObject.Find("bottom").transform;
-        //cupColorManager = FindObjectOfType<CupColorManager>();
         if (minRotDeg < 1) minRotDeg = 1;
         transform.localEulerAngles = new Vector3(minRotDeg, 0, 0);
     }
@@ -57,27 +56,20 @@ public class Tap : MonoBehaviour
                 transform.localEulerAngles = Vector3.right * minRotDeg;
                 isRotated = false;
                 isPouring = false;
-                //cupColorManager.StopPour(color);
-            }
-
+            }  
 
         }
+        if (transform.localEulerAngles.x > maxRotDeg / 2 && transform.localEulerAngles.x < 47) audioSource.PlayOneShot(handleSounds[0], 0.1f);
+        if (transform.localEulerAngles.x > 85 && transform.localEulerAngles.x < 90) audioSource.PlayOneShot(handleSounds[1], 0.05f);
+
         if (!isRotated && transform.localEulerAngles.x > minRotDeg)
         {
-            //Pour();
             pourFlow.GetComponent<ParticleSystem>().emissionRate = 10 + (300 - 10) * (PourValue / 100);
             isPouring = true;
         }
 
     }
-    private void Pour()
-    {
-        if (isPouring)
-        {
-            //cupColorManager.StartPour(color, PourValue);
-        }
-    }
-
+    
     private void OnMouseDown()
     {
         pourFlow = Instantiate(pourFlowPrefab, pourTransform.position, pourTransform.rotation);
@@ -93,7 +85,6 @@ public class Tap : MonoBehaviour
         if (transform.localEulerAngles.x + rot > minRotDeg && transform.localEulerAngles.x + rot < maxRotDeg)
             transform.Rotate(rot, 0, 0);
 
-        //Debug.Log(transform.gameObject.name + " " + PourValue + "%");
         isRotated = false;
         isPouring = true;
     }
