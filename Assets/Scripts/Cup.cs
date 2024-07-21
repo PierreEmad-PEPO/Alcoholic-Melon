@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Drawing;
 using UnityEngine;
 
 public class Cup : MonoBehaviour
@@ -11,7 +12,9 @@ public class Cup : MonoBehaviour
 
     [SerializeField] private Tap currentTap;
     [SerializeField] private float quantity;
+    [SerializeField] private float quantityOverflow;
     private float height;
+    private int correct, wrong;
 
     Dictionary<TapName, float> drinks;
 
@@ -23,6 +26,7 @@ public class Cup : MonoBehaviour
     {
         colorManager = FindObjectOfType<CupColorManager>();
         quantity = 0;
+        correct = wrong = 0;
         height = top.position.y - bottom.position.y;
         UpdateCurrentTap();
     }
@@ -33,6 +37,7 @@ public class Cup : MonoBehaviour
         if (currentTap.IsPouring)
         {
             quantity += currentTap.PourValue/100 * fillingSpeed * Time.deltaTime;
+            if (quantity > 100f) quantityOverflow += quantity - 100f;
             currentTap.RemainingPercentage -= currentTap.PourValue / 100 * fillingSpeed * Time.deltaTime;
             quantity = Mathf.Clamp(quantity, 0, 100);
 
@@ -43,8 +48,9 @@ public class Cup : MonoBehaviour
         }
         else colorManager.StopPour(currentTap.color);
 
-        if (quantity >= 100)
+        if ((quantity >= 100 && !currentTap.IsPouring) || quantityOverflow > 10)
         {
+            quantity += quantityOverflow;
             ResetCup();
         }
     }
@@ -62,6 +68,43 @@ public class Cup : MonoBehaviour
         {
             checkArea.transform.position = Vector3.one * 1000;
         }
+    }
+
+    public void CheckCurrentFlow()
+    {
+        Collider[] colliders = Physics.OverlapBox(CurrentPourPoint - bottom.up * 0.02f, new Vector3(0.1f, 0.005f, 0.1f));
+        foreach (Collider collider in colliders) 
+        {
+            if (collider.gameObject.name.Equals("target"))
+            {
+                CorrectHit();
+                return;
+            }
+        }
+        foreach (Collider collider in colliders)
+        {
+            if (collider.gameObject.name.Equals("safe"))
+            {
+                Debug.Log("Safe");
+                return;
+            }
+        }
+
+        WrongHit();
+    }
+
+    private void CorrectHit()
+    {
+        Debug.Log("Correct");
+        correct++;
+        //play music
+    }
+
+    private void WrongHit()
+    {
+        Debug.Log("Wrong");
+        wrong++;
+        //play music
     }
 
     public void UpdateCurrentTap()
@@ -90,14 +133,23 @@ public class Cup : MonoBehaviour
                 drinks[TapName.Blue] += per;
                 break;
 
-
         }
     }
 
     void ResetCup()
     {
-        Camera.main.GetComponent<CameraFocus>().MoveToStart(1, 1);
+        Camera.main.GetComponent<CameraFocus>().MoveToStart(correct, wrong);
         quantity = 0;
+        quantityOverflow = 0;
+        correct = wrong = 0;
         checkArea.transform.position = Vector3.one * 1000;
+    }
+
+    void OnDrawGizmos()
+    {
+        Gizmos.color = UnityEngine.Color.red; // Set Gizmos color
+
+        // Draw wire cube at specified position (center) and size
+        Gizmos.DrawWireCube(CurrentPourPoint - bottom.up * 0.02f, new Vector3(0.1f, 0.005f, 0.1f));
     }
 }

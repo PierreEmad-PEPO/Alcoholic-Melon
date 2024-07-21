@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0.18327983, g: 0.22891437, b: 0.30631873, a: 1}
+  m_IndirectSpecularColor: {r: 0.18328032, g: 0.22891514, b: 0.3063196, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -668,6 +668,8 @@ MonoBehaviour:
   pourFlowPrefab: {fileID: 7533336762438628531, guid: 31c2dd5a706ea7e48ac0286f2e255ce2, type: 3}
   bubblesPrefab: {fileID: 2417210899945139552, guid: ff16a96d768a1644db9168f5b0f7bf65, type: 3}
   cupTransform: {fileID: 1372929293}
+  handleSounds: []
+  cup: {fileID: 1000642678}
 --- !u!65 &514167109
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -1047,6 +1049,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2971123579340581029, guid: 4f6563b18a1bbdd49a5b8e6b939c7442, type: 3}
+      propertyPath: m_Name
+      value: safe
+      objectReference: {fileID: 0}
     - target: {fileID: 5079716629006195443, guid: 4f6563b18a1bbdd49a5b8e6b939c7442, type: 3}
       propertyPath: m_Name
       value: CheckTarget
@@ -1056,16 +1062,40 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5967806460162872533, guid: 4f6563b18a1bbdd49a5b8e6b939c7442, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 0.02
+      objectReference: {fileID: 0}
+    - target: {fileID: 5967806460162872533, guid: 4f6563b18a1bbdd49a5b8e6b939c7442, type: 3}
       propertyPath: m_LocalPosition.y
+      value: -0.077
+      objectReference: {fileID: 0}
+    - target: {fileID: 6983422996834655145, guid: 4f6563b18a1bbdd49a5b8e6b939c7442, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 0.02
+      objectReference: {fileID: 0}
+    - target: {fileID: 6983422996834655145, guid: 4f6563b18a1bbdd49a5b8e6b939c7442, type: 3}
+      propertyPath: m_LocalPosition.x
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6983422996834655145, guid: 4f6563b18a1bbdd49a5b8e6b939c7442, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.060000606
+      value: -0.036999844
+      objectReference: {fileID: 0}
+    - target: {fileID: 6983422996834655145, guid: 4f6563b18a1bbdd49a5b8e6b939c7442, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7619476648942790101, guid: 4f6563b18a1bbdd49a5b8e6b939c7442, type: 3}
+      propertyPath: m_Name
+      value: safe
+      objectReference: {fileID: 0}
+    - target: {fileID: 9090534344041743060, guid: 4f6563b18a1bbdd49a5b8e6b939c7442, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 0.02
       objectReference: {fileID: 0}
     - target: {fileID: 9090534344041743060, guid: 4f6563b18a1bbdd49a5b8e6b939c7442, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -0.060000658
+      value: -0.11700008
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -1322,6 +1352,7 @@ MonoBehaviour:
   liquidRend: {fileID: 105442842}
   currentTap: {fileID: 1330919042}
   quantity: 0
+  quantityOverflow: 0
 --- !u!114 &1000642679
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1484,6 +1515,8 @@ MonoBehaviour:
   pourFlowPrefab: {fileID: 7533336762438628531, guid: 31c2dd5a706ea7e48ac0286f2e255ce2, type: 3}
   bubblesPrefab: {fileID: 2417210899945139552, guid: ff16a96d768a1644db9168f5b0f7bf65, type: 3}
   cupTransform: {fileID: 1872411638}
+  handleSounds: []
+  cup: {fileID: 1000642678}
 --- !u!65 &1109295945
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -1616,6 +1649,8 @@ MonoBehaviour:
   pourFlowPrefab: {fileID: 7533336762438628531, guid: 31c2dd5a706ea7e48ac0286f2e255ce2, type: 3}
   bubblesPrefab: {fileID: 2417210899945139552, guid: ff16a96d768a1644db9168f5b0f7bf65, type: 3}
   cupTransform: {fileID: 44053015}
+  handleSounds: []
+  cup: {fileID: 1000642678}
 --- !u!65 &1330919043
 BoxCollider:
   m_ObjectHideFlags: 0

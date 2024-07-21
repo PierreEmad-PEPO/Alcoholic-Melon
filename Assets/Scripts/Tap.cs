@@ -12,6 +12,8 @@ public class Tap : MonoBehaviour
     [SerializeField] private GameObject bubblesPrefab;
     [SerializeField] private Transform cupTransform;
     [SerializeField] private AudioClip[] handleSounds;
+    [SerializeField] private Cup cup;
+
     private float rotateBack = 200f;
     //private CupColorManager cupColorManager;
     private bool isRotated = false;
@@ -105,5 +107,7 @@ public class Tap : MonoBehaviour
         bubbles.transform.GetChild(0).GetComponent<ParticleSystem>().Stop();
         Destroy(pourFlow, 2f);
         Destroy(bubbles, 2f);
+
+        cup.CheckCurrentFlow();
     }
 }
