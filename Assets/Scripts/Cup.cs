@@ -13,6 +13,8 @@ public class Cup : MonoBehaviour
     [SerializeField] private float quantity;
     private float height;
 
+    Dictionary<TapName, float> drinks;
+
     private CupColorManager colorManager;
     public Vector3 CurrentPourPoint { get { return bottom.position + quantity/100 * height * bottom.up; } }
 
@@ -36,9 +38,15 @@ public class Cup : MonoBehaviour
 
             liquidRend.material.SetVector("_ClippingPosition", CurrentPourPoint - bottom.up * 0.02f);
             colorManager.StartPour(currentTap.color, currentTap.PourValue);
-            
+
+            AddDrink(currentTap.tag, currentTap.PourValue / 100 * fillingSpeed * Time.deltaTime);
         }
         else colorManager.StopPour(currentTap.color);
+
+        if (quantity >= 100)
+        {
+            ResetCup();
+        }
     }
 
     public void SetCurrentTap(Tap newTap)
@@ -58,6 +66,38 @@ public class Cup : MonoBehaviour
 
     public void UpdateCurrentTap()
     {
+        drinks = new Dictionary<TapName, float>();
         SetCurrentTap(currentTap);
+    }
+
+    public void AddDrink(string s, float per)
+    {
+        switch (s)
+        {
+            case "Red":
+                if (!drinks.ContainsKey(TapName.Red))
+                    drinks.Add(TapName.Red, 0);
+                drinks[TapName.Red] += per;
+                break;
+            case "Green":
+                if (!drinks.ContainsKey(TapName.Green))
+                    drinks.Add(TapName.Green, 0);
+                drinks[TapName.Green] += per;
+                break;
+            case "Blue":
+                if (!drinks.ContainsKey(TapName.Blue))
+                    drinks.Add(TapName.Blue, 0);
+                drinks[TapName.Blue] += per;
+                break;
+
+
+        }
+    }
+
+    void ResetCup()
+    {
+        Camera.main.GetComponent<CameraFocus>().MoveToStart(1, 1);
+        quantity = 0;
+        checkArea.transform.position = Vector3.one * 1000;
     }
 }

@@ -9,6 +9,10 @@ public class Judgement : MonoBehaviour
     [SerializeField] Tap blueTap;
     [SerializeField] Cup cup;
 
+    public string[] likedSentences;
+    public string[] semilikedSentences;
+    public string[] dislikedSentences;
+
     Dictionary<TapName, Tap> taps = new Dictionary<TapName, Tap>();
     Customer customer = null;
 
@@ -21,9 +25,24 @@ public class Judgement : MonoBehaviour
         Events.OnplayerClickOncustomer.AddListener(InitTaps);
     }
 
-    public void Judge (Drink drink, Drink newDrink)
+    public void Judge (int correct, int wrong)
     {
-        customer.Judge("asdfasdf");
+        if (correct > wrong)
+        {
+            int random = Random.Range(0, likedSentences.Length);
+            customer.Judge(likedSentences[random]);
+        }
+        else if (correct < wrong) 
+        {
+            int random = Random.Range(0, dislikedSentences.Length);
+            customer.Judge(dislikedSentences[random]);
+        }
+        else
+        {
+            int random = Random.Range(0, semilikedSentences.Length);
+            customer.Judge(semilikedSentences[random]);
+        }
+        
         customer = null;
     }
 
