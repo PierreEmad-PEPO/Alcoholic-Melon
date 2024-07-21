@@ -1499,10 +1499,46 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4617993664325565154, guid: 0cfde0ea7b81fbf43832d09e46ca726d, type: 3}
+      propertyPath: handleSounds.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 4617993664325565154, guid: 0cfde0ea7b81fbf43832d09e46ca726d, type: 3}
+      propertyPath: handleSounds.Array.data[0]
+      value: 
+      objectReference: {fileID: 8300000, guid: de3a7a68a0403fc4c9f48c4590bcae85, type: 3}
+    - target: {fileID: 4617993664325565154, guid: 0cfde0ea7b81fbf43832d09e46ca726d, type: 3}
+      propertyPath: handleSounds.Array.data[1]
+      value: 
+      objectReference: {fileID: 8300000, guid: db0b7aa80a5d75945b349027b5640e83, type: 3}
+    - target: {fileID: 4731409304521166871, guid: 0cfde0ea7b81fbf43832d09e46ca726d, type: 3}
+      propertyPath: handleSounds.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 4731409304521166871, guid: 0cfde0ea7b81fbf43832d09e46ca726d, type: 3}
+      propertyPath: handleSounds.Array.data[0]
+      value: 
+      objectReference: {fileID: 8300000, guid: b73a0ce1e007a4848a8cbd336d9a8d9d, type: 3}
+    - target: {fileID: 4731409304521166871, guid: 0cfde0ea7b81fbf43832d09e46ca726d, type: 3}
+      propertyPath: handleSounds.Array.data[1]
+      value: 
+      objectReference: {fileID: 8300000, guid: b5968813a2dcd5a41be4555e1d6d0eca, type: 3}
     - target: {fileID: 5078261256824898646, guid: 0cfde0ea7b81fbf43832d09e46ca726d, type: 3}
       propertyPath: m_Name
       value: machine
       objectReference: {fileID: 0}
+    - target: {fileID: 7872466379501235511, guid: 0cfde0ea7b81fbf43832d09e46ca726d, type: 3}
+      propertyPath: handleSounds.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 7872466379501235511, guid: 0cfde0ea7b81fbf43832d09e46ca726d, type: 3}
+      propertyPath: handleSounds.Array.data[0]
+      value: 
+      objectReference: {fileID: 8300000, guid: db4f3c500e5353545b76f7bc12b5c24a, type: 3}
+    - target: {fileID: 7872466379501235511, guid: 0cfde0ea7b81fbf43832d09e46ca726d, type: 3}
+      propertyPath: handleSounds.Array.data[1]
+      value: 
+      objectReference: {fileID: 8300000, guid: 7b3a89c87973d8b448d801a6a9d9c5d4, type: 3}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
