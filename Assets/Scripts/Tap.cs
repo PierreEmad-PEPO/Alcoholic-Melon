@@ -58,7 +58,7 @@ public class Tap : MonoBehaviour
 
         }
         if (transform.localEulerAngles.x > maxRotDeg / 2 && transform.localEulerAngles.x < 47) audioSource.PlayOneShot(handleSounds[0], 0.1f);
-        if (transform.localEulerAngles.x > 85 && transform.localEulerAngles.x < 90) audioSource.PlayOneShot(handleSounds[1], 0.05f);
+        if (transform.localEulerAngles.x > 88 && transform.localEulerAngles.x < 90) audioSource.PlayOneShot(handleSounds[1], 0.05f);
 
         if (!isRotated && transform.localEulerAngles.x > minRotDeg)
         {
