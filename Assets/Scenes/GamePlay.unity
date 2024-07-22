@@ -2355,6 +2355,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Main Menu
       objectReference: {fileID: 0}
+    - target: {fileID: 7315313913589971320, guid: 83a01658471218046939f3f54564bd6d, type: 3}
+      propertyPath: m_Color.a
+      value: 0.60784316
+      objectReference: {fileID: 0}
     - target: {fileID: 8223702657511716076, guid: 83a01658471218046939f3f54564bd6d, type: 3}
       propertyPath: m_Pivot.x
       value: 0
