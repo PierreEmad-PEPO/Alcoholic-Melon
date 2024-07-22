@@ -18,9 +18,9 @@ public class Judgement : MonoBehaviour
 
     private void Start()
     {
-        taps.Add(TapName.Blue, blueTap);
-        taps.Add(TapName.Red, redTap);
-        taps.Add (TapName.Green, greenTap);
+        taps.Add(TapName.Tea, blueTap);
+        taps.Add(TapName.Ale, redTap);
+        taps.Add (TapName.Mead, greenTap);
 
         Events.OnplayerClickOncustomer.AddListener(InitTaps);
     }

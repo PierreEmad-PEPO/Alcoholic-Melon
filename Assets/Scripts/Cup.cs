@@ -119,19 +119,19 @@ public class Cup : MonoBehaviour
         switch (s)
         {
             case "Red":
-                if (!drinks.ContainsKey(TapName.Red))
-                    drinks.Add(TapName.Red, 0);
-                drinks[TapName.Red] += per;
+                if (!drinks.ContainsKey(TapName.Ale))
+                    drinks.Add(TapName.Ale, 0);
+                drinks[TapName.Ale] += per;
                 break;
             case "Green":
-                if (!drinks.ContainsKey(TapName.Green))
-                    drinks.Add(TapName.Green, 0);
-                drinks[TapName.Green] += per;
+                if (!drinks.ContainsKey(TapName.Mead))
+                    drinks.Add(TapName.Mead, 0);
+                drinks[TapName.Mead] += per;
                 break;
             case "Blue":
-                if (!drinks.ContainsKey(TapName.Blue))
-                    drinks.Add(TapName.Blue, 0);
-                drinks[TapName.Blue] += per;
+                if (!drinks.ContainsKey(TapName.Tea))
+                    drinks.Add(TapName.Tea, 0);
+                drinks[TapName.Tea] += per;
                 break;
 
         }

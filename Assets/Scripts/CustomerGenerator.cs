@@ -59,33 +59,33 @@ public class CustomerGenerator : MonoBehaviour
     {
         drinks = new Dictionary<DrinkName, Drink>();
 
-         Drink drink = new Drink(DrinkName.aaa,
+         Drink drink = new Drink(DrinkName.Lemozingy,
            new Dictionary<TapName, float>() {
-                { TapName.Red, 60f},
-                {TapName.Green, 40f }
+                { TapName.Ale, 60f},
+                {TapName.Mead, 40f }
            });
         drinks.Add(drink.name, drink);
         
-        drink = new Drink(DrinkName.bbb,
+        drink = new Drink(DrinkName.Skartah,
            new Dictionary<TapName, float>() {
-                { TapName.Red, 25f},
-                {TapName.Green, 75f }
+                { TapName.Ale, 25f},
+                {TapName.Tea, 75f }
            });
 
         drinks.Add(drink.name, drink);
 
-        drink = new Drink(DrinkName.ccc,
+        drink = new Drink(DrinkName.Quolqas,
             new Dictionary<TapName, float>() {
-                { TapName.Red, 50f},
-                {TapName.Green, 50f }
+                { TapName.Tea, 50f},
+                {TapName.Mead, 50f }
             });
         drinks.Add(drink.name, drink);
 
-       drink = new Drink(DrinkName.ddd,
+       drink = new Drink(DrinkName.GG,
             new Dictionary<TapName, float>() {
-                {TapName.Red, 50f},
-                {TapName.Green, 25f },
-                {TapName.Blue, 25f }
+                {TapName.Tea, 50f},
+                {TapName.Mead, 25f },
+                {TapName.Ale, 25f }
             });
         drinks.Add(drink.name, drink);
 

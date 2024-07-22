@@ -4,16 +4,16 @@ using UnityEngine;
 
 public enum DrinkName 
 {
-    aaa,
-    bbb,
-    ccc,
-    ddd
+    Lemozingy,
+    Skartah,
+    Quolqas,
+    GG
 
 }
 
 public enum TapName
 {
-   Red,
-   Green,
-   Blue,
+   Ale,
+   Mead,
+   Tea,
 }
