@@ -4,10 +4,10 @@ using UnityEngine;
 
 public enum DrinkName 
 {
-    Lemozingy,
-    GoldBlend,
-    Blossom,
     Reverie,
+    GoldBlend,
+    Lemozingy,
+    Blossom,
     Serenade
 
 }

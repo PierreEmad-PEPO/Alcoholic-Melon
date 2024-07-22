@@ -9,9 +9,9 @@ public class Judgement : MonoBehaviour
     [SerializeField] Tap blueTap;
     [SerializeField] Cup cup;
 
-    public string[] likedSentences;
-    public string[] semilikedSentences;
-    public string[] dislikedSentences;
+    public string[] likedSentences = new string[0];
+    public string[] semilikedSentences = new string[0];
+    public string[] dislikedSentences = new string[0];
 
     Dictionary<TapName, Tap> taps = new Dictionary<TapName, Tap>();
     Customer customer = null;

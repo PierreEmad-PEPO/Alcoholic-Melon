@@ -21,6 +21,14 @@ public class CupColorManager : MonoBehaviour
         colorPullTimes[blueTap.color] = 0f;
     }
 
+    public void ResetColor()
+    {
+        currentColor = cupRenderer.material.color;
+        colorPullTimes[redTap.color] = 0f;
+        colorPullTimes[greenTap.color] = 0f;
+        colorPullTimes[blueTap.color] = 0f;
+    }
+
     void Update()
     {
         float totalPullTime = 0f;

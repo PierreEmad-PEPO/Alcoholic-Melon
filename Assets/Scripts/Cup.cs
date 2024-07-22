@@ -52,7 +52,7 @@ public class Cup : MonoBehaviour
         if ((quantity >= 100 && !currentTap.IsPouring) || quantityOverflow > 10)
         {
             quantity += quantityOverflow;
-            ResetCup();
+            StartCoroutine(ResetCup());
         }
     }
 
@@ -137,14 +137,16 @@ public class Cup : MonoBehaviour
         }
     }
 
-    void ResetCup()
+    IEnumerator ResetCup()
     {
         judgement.Judge(correct, wrong);
         quantity = 0;
         quantityOverflow = 0;
         correct = wrong = 0;
         checkArea.transform.position = Vector3.one * 1000;
+        yield return new WaitForSeconds(2);
         liquidRend.material.SetVector("_ClippingPosition", CurrentPourPoint - bottom.up * 200f);
+        colorManager.ResetColor();
     }
 
     void OnDrawGizmos()
