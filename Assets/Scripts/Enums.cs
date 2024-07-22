@@ -5,9 +5,10 @@ using UnityEngine;
 public enum DrinkName 
 {
     Lemozingy,
-    Skartah,
-    Quolqas,
-    GG
+    Golden_Blend,
+    Mead_Blossom,
+    Ale_Reverie,
+    Ale_Serenade
 
 }
 

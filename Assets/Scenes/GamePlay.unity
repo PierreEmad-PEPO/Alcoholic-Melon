@@ -734,9 +734,9 @@ MonoBehaviour:
   - {fileID: 1883064282}
   - {fileID: 1376446383}
   firstSentences:
-  - 'Give Me, '
+  - I want,
   secondSentences:
-  - That Contain
+  - that contains
 --- !u!4 &644606892
 Transform:
   m_ObjectHideFlags: 0
@@ -1380,11 +1380,11 @@ MonoBehaviour:
   blueTap: {fileID: 514167108}
   cup: {fileID: 1000642678}
   likedSentences:
-  - wwww
+  - wow you are talented
   semilikedSentences:
-  - dddddddd
+  - Meh you could do beter
   dislikedSentences:
-  - 555555
+  - Thats not what i asked for
 --- !u!4 &1092037709
 Transform:
   m_ObjectHideFlags: 0
