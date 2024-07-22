@@ -734,9 +734,9 @@ MonoBehaviour:
   - {fileID: 1883064282}
   - {fileID: 1376446383}
   firstSentences:
-  - I want,
+  - 'give me '
   secondSentences:
-  - that contains
+  - 'contains '
 --- !u!4 &644606892
 Transform:
   m_ObjectHideFlags: 0

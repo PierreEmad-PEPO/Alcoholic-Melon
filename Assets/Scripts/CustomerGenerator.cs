@@ -66,7 +66,7 @@ public class CustomerGenerator : MonoBehaviour
            });
         drinks.Add(drink.name, drink);
         
-        drink = new Drink(DrinkName.Golden_Blend,
+        drink = new Drink(DrinkName.GoldBlend,
            new Dictionary<TapName, float>() {
                 { TapName.Ale, 25f},
                 {TapName.Tea, 75f }
@@ -74,14 +74,14 @@ public class CustomerGenerator : MonoBehaviour
 
         drinks.Add(drink.name, drink);
 
-        drink = new Drink(DrinkName.Mead_Blossom,
+        drink = new Drink(DrinkName.Blossom,
             new Dictionary<TapName, float>() {
                 { TapName.Tea, 50f},
                 {TapName.Mead, 50f }
             });
         drinks.Add(drink.name, drink);
 
-       drink = new Drink(DrinkName.Ale_Reverie,
+       drink = new Drink(DrinkName.Reverie,
             new Dictionary<TapName, float>() {
                 {TapName.Tea, 50f},
                 {TapName.Mead, 25f },
@@ -89,7 +89,7 @@ public class CustomerGenerator : MonoBehaviour
             });
         drinks.Add(drink.name, drink);
 
-        drink = new Drink(DrinkName.Ale_Serenade,
+        drink = new Drink(DrinkName.Serenade,
             new Dictionary<TapName, float>() {
                 {TapName.Tea, 70f},
                 {TapName.Mead, 20f },
