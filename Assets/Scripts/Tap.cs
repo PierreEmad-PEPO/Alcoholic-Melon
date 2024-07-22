@@ -14,13 +14,14 @@ public class Tap : MonoBehaviour
     [SerializeField] private AudioSource audioSource;
     [SerializeField] private AudioClip[] handleSounds;
     [SerializeField] private Cup cup;
-
+    [SerializeField] private AudioClip noise;
     private float rotateBack = 200f;
     private bool isRotated = false;
     private bool isPouring = false;
     private GameObject pourFlow;
     private GameObject bubbles;
     private Transform bubblesTransform;
+    
     public float PourValue { get { return (transform.localEulerAngles.x - minRotDeg) / (maxRotDeg - minRotDeg) * pourFactor; } }
 
     public float RemainingPercentage { get; set; }
@@ -39,6 +40,10 @@ public class Tap : MonoBehaviour
         bubblesTransform = GameObject.Find("bottom").transform;
         if (minRotDeg < 1) minRotDeg = 1;
         transform.localEulerAngles = new Vector3(minRotDeg, 0, 0);
+        if (noise != null)
+        {
+            audioSource.PlayOneShot(noise, Random.Range(0f, 0.7f));
+        }
     }
 
 
@@ -59,6 +64,7 @@ public class Tap : MonoBehaviour
             }  
 
         }
+        
         if (transform.localEulerAngles.x > maxRotDeg / 2 && transform.localEulerAngles.x < 47) audioSource.PlayOneShot(handleSounds[0], 0.1f);
         if (transform.localEulerAngles.x > 85 && transform.localEulerAngles.x < 90) audioSource.PlayOneShot(handleSounds[1], 0.05f);
 
