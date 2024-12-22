@@ -1,17 +1,8 @@
-using System.Collections;
-using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
 
 public class SwitchTap : MonoBehaviour
 {
-    [SerializeField] Transform red, green, blue;
-
-
-    // Update is called once per frame
-    void Update()
-    {
-    }
+    [SerializeField] private Transform red, green, blue;
 
     private void OnMouseDrag()
     {
@@ -31,8 +22,7 @@ public class SwitchTap : MonoBehaviour
         }
     }
 
-
-    Transform GetMinDis()
+    private Transform GetMinDis()
     {
         float r = Vector3.Distance(transform.position, red.position);
         float g = Vector3.Distance(transform.position, green.position);

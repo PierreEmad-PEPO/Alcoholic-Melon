@@ -1,7 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-
 public enum DrinkName 
 {
     Reverie,
@@ -9,7 +5,6 @@ public enum DrinkName
     Lemozingy,
     Blossom,
     Serenade
-
 }
 
 public enum TapName

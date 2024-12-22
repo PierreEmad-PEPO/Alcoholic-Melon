@@ -44,7 +44,7 @@ public class CustomerGenerator : MonoBehaviour
             string fs = firstSentences[UnityEngine.Random.Range(0, firstSentences.Length)];
             string sec = secondSentences[UnityEngine.Random.Range(0, secondSentences.Length)];
             //Debug.Log(customerStandPos.Count + "  " + customerStandPos[randomPosIndex].position);
-            customer.intiCustomer(customerStandPos[randomPosIndex], drinks[randomDrink], fs, sec);
+            customer.InitCustomer(customerStandPos[randomPosIndex], drinks[randomDrink], fs, sec);
             customerStandPos.RemoveAt(randomPosIndex);
 
         }

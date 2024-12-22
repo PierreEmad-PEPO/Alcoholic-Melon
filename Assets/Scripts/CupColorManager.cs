@@ -58,23 +58,13 @@ public class CupColorManager : MonoBehaviour
 
     public void StartPour(Color color, float pourValue)
     {
-
         if (colorPullTimes.ContainsKey(color))
-        {
-            colorPullTimes[color] += pourValue * Time.deltaTime;
-            //Debug.Log("pouring");
-        }
-       
+            colorPullTimes[color] += pourValue * Time.deltaTime; 
     }
 
     public void StopPour(Color color)
     {
-
         if (colorPullTimes.ContainsKey(color))
-        {
             colorPullTimes[color] = Mathf.Max(0, colorPullTimes[color] - Time.deltaTime);
-            //Debug.Log("Stopped pouring color");
-        }
-       
     }
 }

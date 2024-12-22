@@ -1,16 +1,12 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEditor;
 using UnityEngine;
 
-public class HandleAllSounds : MonoBehaviour
+public class SoundManager : MonoBehaviour
 {
     private AudioSource audioSource;
     [SerializeField]  AudioClip noise;
-    private void Start()
-    {
-        audioSource = GetComponent<AudioSource>();
-    }
+
+    private void Start()=>audioSource = GetComponent<AudioSource>();
+    
     public void playHandlesSound(GameObject tabRotation,AudioClip clip1, AudioClip clip2)
     {
         if(tabRotation.transform.eulerAngles.x>45&& tabRotation.transform.eulerAngles.x < 46) audioSource.PlayOneShot(clip1);

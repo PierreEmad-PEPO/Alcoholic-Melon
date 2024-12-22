@@ -1,38 +1,36 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class Customer : MonoBehaviour
 {
-    [SerializeField] float moveSpeed = 2;
-    [SerializeField] float rotateSpeed = 45;
-    [SerializeField] GameObject canves;
-    [SerializeField] Text text;
+    [SerializeField] private float moveSpeed = 2;
+    [SerializeField] private float rotateSpeed = 45;
+    [SerializeField] private GameObject canves;
+    [SerializeField] private Text text;
 
-    Transform tagetTransform;
-    Vector3 tagetPos;
-    Quaternion tagetRotationl;
-
-    Drink drink;
-    string firstSentence = "";
-    string secondSentence = "";
-    
-    bool isNotArrive = false;
-    bool isRotate = false;
-    bool once = false;
+    private Transform tagetTransform;
+    private Vector3 tagetPos;
+    private Quaternion tagetRotationl;
+    private Drink drink;
+    private string firstSentence = "";
+    private string secondSentence = "";
+    private bool isNotArrive = false;
+    private bool isRotate = false;
+    private bool once = false;
 
     Action actionAfterArrived;
 
     public Drink Drink { get { return drink; } }
 
-    void Update()
+    private void Update()
     {
         MoveTo();
         Rotate();
     }
+
     private void OnMouseDown()
     {
         if (!once)
@@ -45,16 +43,16 @@ public class Customer : MonoBehaviour
     public void Judge(string text)
     {
         this.text.text = text;
-        StartCoroutine(Wit());
+        StartCoroutine(Wait());
     }
 
-    IEnumerator Wit()
+    private IEnumerator Wait()
     {
         yield return new WaitForSeconds(5);
-        startRotate();
+        StartRotation();
     }
 
-    void startRotate()
+    private void StartRotation()
     {
         tagetRotationl = transform.rotation;
         tagetRotationl.eulerAngles += (Vector3.up * 180);
@@ -62,8 +60,7 @@ public class Customer : MonoBehaviour
         isRotate = true;
     }
 
-
-    void MoveTo()
+    private void MoveTo()
     {
         if (isNotArrive)
         {
@@ -73,17 +70,13 @@ public class Customer : MonoBehaviour
             {
                 transform.position = tagetPos;
                 isNotArrive = false;
-
-                if (actionAfterArrived != null)
-                    actionAfterArrived();
+                actionAfterArrived?.Invoke();
                 actionAfterArrived = null;
             }
         }
     }
 
-
-
-    void Rotate()
+    private void Rotate()
     {
         if (isRotate)
         {
@@ -102,7 +95,7 @@ public class Customer : MonoBehaviour
         }
     }
 
-    void ApperCanves()
+    private void ShowCanvas()
     {
         text.text = firstSentence + drink.name + "\n";
         text.text += secondSentence + "\n";
@@ -113,12 +106,14 @@ public class Customer : MonoBehaviour
         text.text = text.text.Remove(text.text.Length - 2, 2);
         canves.SetActive(true);
     }
-    void DestroyCustomer()
+
+    private void DestroyCustomer()
     {
         Events.onCustomerGoen.Invoke(tagetTransform);
         Destroy(gameObject);
     }
-    public void intiCustomer(Transform _tagetPos, Drink _drink, string _firstSen, string _secSen)
+
+    public void InitCustomer(Transform _tagetPos, Drink _drink, string _firstSen, string _secSen)
     {
         tagetTransform = _tagetPos;
         tagetPos = _tagetPos.position;
@@ -126,9 +121,6 @@ public class Customer : MonoBehaviour
         firstSentence = _firstSen;
         secondSentence = _secSen;
         isNotArrive = true;
-        actionAfterArrived = ApperCanves;
+        actionAfterArrived = ShowCanvas;
     }
-    
-
-
 }
