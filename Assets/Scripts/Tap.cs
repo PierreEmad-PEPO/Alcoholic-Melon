@@ -10,9 +10,7 @@ public class Tap : MonoBehaviour
     [SerializeField] private GameObject pourFlowPrefab;
     [SerializeField] private GameObject bubblesPrefab;
     [SerializeField] private Transform cupTransform;
-    [SerializeField] private AudioSource audioSource;
     [SerializeField] private Cup cup;
-    [SerializeField] private AudioClip noise;
 
     private float rotateBack = 200f;
     private bool isRotated = false;
@@ -36,11 +34,6 @@ public class Tap : MonoBehaviour
         bubblesTransform = GameObject.Find("bottom").transform;
         if (minRotDeg < 1) minRotDeg = 1;
         transform.localEulerAngles = new Vector3(minRotDeg, 0, 0);
-        //TODO: use sound manager methods to play sounds
-        if (noise != null)
-        {
-            audioSource.PlayOneShot(noise, Random.Range(0f, 0.7f));
-        }
     }
 
     private void Update()

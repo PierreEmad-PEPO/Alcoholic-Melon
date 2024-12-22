@@ -26,6 +26,11 @@ public class SoundManager : MonoBehaviour
             audioSource.PlayOneShot(handleSounds[1], 0.05f);
     }
 
-    public void PlayRandomNoise()=>audioSource.PlayOneShot(noise, Random.Range(0f,0.9f));
-    
+    public void PlayRandomNoise()=>audioSource.PlayOneShot(noise, Random.Range(0f,0.6f));
+
+    public void PlayMainMenuMusic() => audioSource.PlayOneShot(mainMenu);
+
+    public void StopMainMenuMusic() => audioSource.Stop();
+
+    public void PlayGameSound() => audioSource.Play();
 }
