@@ -49,8 +49,17 @@ MonoBehaviour:
   blueTap: {fileID: 0}
   cup: {fileID: 0}
   likedSentences:
-  - wow you are talented
+  - Wow you are talented!
+  - This drink tastes like magic in a mug!
+  - "You\u2019re a true mixology master"
+  - "I\u2019ll be coming back for more of this"
   semilikedSentences:
-  - Meh you could do beter
+  - "Hmm, not bad, but I\u2019ve had better"
+  - "It\u2019s okay... I guess it\u2019ll do for now"
+  - "I\u2019ll finish it, but it\u2019s not my favorite"
   dislikedSentences:
-  - Thats not what i asked for
+  - Thats not what I asked for
+  - Ugh, what even is this? Try again
+  - "This isn\u2019t what I ordered at all"
+  - "I\u2019d rather drink water\u2026 plain water"
+  - Yikes, did you mix this in a boot?
