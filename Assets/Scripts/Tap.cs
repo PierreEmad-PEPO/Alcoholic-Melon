@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class Tap : MonoBehaviour
 {
-    [SerializeField] private Color color;
+    [SerializeField] public Color color;
     [SerializeField] private float minRotDeg, maxRotDeg;
     [SerializeField] private float pourFactor;
     [SerializeField] private float rotationSpeed;
