@@ -1,6 +1,5 @@
 using System.Collections;
 using System.Collections.Generic;
-using System.Drawing;
 using UnityEngine;
 
 public class Cup : MonoBehaviour
@@ -10,14 +9,14 @@ public class Cup : MonoBehaviour
     [SerializeField] private Transform top, bottom;
     [SerializeField] private Renderer liquidRend;
     [SerializeField] private Judgement judgement;
-
     [SerializeField] private Tap currentTap;
     [SerializeField] private float quantity;
     [SerializeField] private float quantityOverflow;
+
     private float height;
     private int correct, wrong;
 
-    Dictionary<TapName, float> drinks;
+    private Dictionary<TapName, float> drinks;
 
     private CupColorManager colorManager;
     public Vector3 CurrentPourPoint { get { return bottom.position + quantity/100 * height * bottom.up; } }
@@ -32,7 +31,6 @@ public class Cup : MonoBehaviour
         UpdateCurrentTap();
     }
 
-    
     void Update()
     {
         if (currentTap.IsPouring)
@@ -58,17 +56,12 @@ public class Cup : MonoBehaviour
 
     public void SetCurrentTap(Tap newTap)
     {
-        Debug.Log(currentTap.RemainingPercentage);
         currentTap = newTap;
 
         if (currentTap.RemainingPercentage > 0)
-        {
             checkArea.transform.position = CurrentPourPoint + bottom.up * currentTap.RemainingPercentage / 100 * height;
-        }
         else
-        {
-            checkArea.transform.position = Vector3.one * 1000;
-        }
+            checkArea.transform.position = Vector3.one * 1000;    
     }
 
     public void CheckCurrentFlow()
@@ -90,7 +83,6 @@ public class Cup : MonoBehaviour
                 return;
             }
         }
-
         WrongHit();
     }
 
@@ -133,7 +125,6 @@ public class Cup : MonoBehaviour
                     drinks.Add(TapName.Tea, 0);
                 drinks[TapName.Tea] += per;
                 break;
-
         }
     }
 
@@ -151,9 +142,7 @@ public class Cup : MonoBehaviour
 
     void OnDrawGizmos()
     {
-        Gizmos.color = UnityEngine.Color.red; // Set Gizmos color
-
-        // Draw wire cube at specified position (center) and size
+        Gizmos.color = UnityEngine.Color.red;
         Gizmos.DrawWireCube(CurrentPourPoint - bottom.up * 0.02f, new Vector3(0.1f, 0.005f, 0.1f));
     }
 }
