@@ -5,18 +5,15 @@ using UnityEngine;
 
 public class CustomerGenerator : MonoBehaviour
 {
-    [SerializeField]
-    GameObject customerPrefab;
-    [SerializeField]
-    List<Transform > customerStandPos;
+    [SerializeField]private GameObject customerPrefab;
+    [SerializeField]private List<Transform > customerStandPos;
 
     Dictionary<DrinkName,Drink> drinks;
 
     public string[] firstSentences;
     public string[] secondSentences;
 
-    // Start is called before the first frame update
-    void Start()
+    private void Start()
     {
         Events.onCustomerGoen.AddListener(AddTransfom);
         AddDrinks();
@@ -24,7 +21,7 @@ public class CustomerGenerator : MonoBehaviour
         StartCoroutine(TryGenerateCustomer());
     }
 
-    IEnumerator TryGenerateCustomer()
+    private IEnumerator TryGenerateCustomer()
     {
         while (true)
         {
@@ -34,7 +31,7 @@ public class CustomerGenerator : MonoBehaviour
         }
     }
 
-    void GenerateCustomer()
+    private void GenerateCustomer()
     {
         DrinkName randomDrink = (DrinkName)UnityEngine.Random.Range(0, Enum.GetValues(typeof(DrinkName)).Length);
         if (customerStandPos.Count > 0 && drinks.ContainsKey(randomDrink))
@@ -43,19 +40,15 @@ public class CustomerGenerator : MonoBehaviour
             int randomPosIndex = UnityEngine.Random.Range(0, customerStandPos.Count);
             string fs = firstSentences[UnityEngine.Random.Range(0, firstSentences.Length)];
             string sec = secondSentences[UnityEngine.Random.Range(0, secondSentences.Length)];
-            //Debug.Log(customerStandPos.Count + "  " + customerStandPos[randomPosIndex].position);
             customer.InitCustomer(customerStandPos[randomPosIndex], drinks[randomDrink], fs, sec);
             customerStandPos.RemoveAt(randomPosIndex);
 
         }
     }
-    public void AddTransfom(Transform t)
-    {
-        Debug.Log(transform.position);
-        customerStandPos.Add(t);
-    }
 
-    void AddDrinks()
+    private void AddTransfom(Transform t)=>customerStandPos.Add(t);
+    
+    private void AddDrinks()
     {
         drinks = new Dictionary<DrinkName, Drink>();
 
@@ -96,7 +89,5 @@ public class CustomerGenerator : MonoBehaviour
                 {TapName.Ale, 10f }
             });
         drinks.Add(drink.name, drink);
-
     }
-
 }
