@@ -7,16 +7,20 @@ public class CustomerGenerator : MonoBehaviour
 {
     [SerializeField]private GameObject customerPrefab;
     [SerializeField]private List<Transform > customerStandPos;
+    [SerializeField]private string[] firstSentences;
+    [SerializeField]private string[] secondSentences;
 
-    Dictionary<DrinkName,Drink> drinks;
-
-    public string[] firstSentences;
-    public string[] secondSentences;
+    private Dictionary<DrinkName,Drink> drinks;
 
     private void Start()
     {
+        CameraFocus.instance.gameStarted += HandleGameStart;
         Events.onCustomerGoen.AddListener(AddTransfom);
         AddDrinks();
+    }
+
+    private void HandleGameStart()
+    {
         GenerateCustomer();
         StartCoroutine(TryGenerateCustomer());
     }
@@ -25,8 +29,8 @@ public class CustomerGenerator : MonoBehaviour
     {
         while (true)
         {
-            float witeTime = UnityEngine.Random.Range(5f, 10f);
-            yield return new WaitForSeconds(witeTime);
+            float waitTime = UnityEngine.Random.Range(5f, 10f);
+            yield return new WaitForSeconds(waitTime);
            GenerateCustomer();
         }
     }
@@ -42,7 +46,6 @@ public class CustomerGenerator : MonoBehaviour
             string sec = secondSentences[UnityEngine.Random.Range(0, secondSentences.Length)];
             customer.InitCustomer(customerStandPos[randomPosIndex], drinks[randomDrink], fs, sec);
             customerStandPos.RemoveAt(randomPosIndex);
-
         }
     }
 

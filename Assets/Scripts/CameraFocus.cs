@@ -1,13 +1,15 @@
+using System;
+using System.Collections;
 using UnityEngine;
 
 public class CameraFocus : MonoBehaviour
 {
     [SerializeField] private Transform machineView;
     [SerializeField] private Transform startTransform;
-    [SerializeField] private float camMoveSpeed = 5;
-    [SerializeField] private float camRotSpeed = 45;
+    [SerializeField] private float transitionDuration = 2.0f;
 
     public static CameraFocus instance;
+    public event Action gameStarted;
 
     private void Awake()
     {
@@ -15,14 +17,32 @@ public class CameraFocus : MonoBehaviour
         transform.rotation = startTransform.rotation;
         if (instance == null)
             instance = this;
-        
+
         else if (instance != this)
             Destroy(gameObject);
     }
 
     public void StartGame()
     {
-        transform.position= Vector3.Lerp(transform.position, machineView.position, camMoveSpeed);
-        transform.rotation = Quaternion.Lerp(transform.rotation, machineView.rotation, camRotSpeed);
+        StartCoroutine(MoveCamera());
+    }
+
+    private IEnumerator MoveCamera()
+    {
+        float elapsedTime = 0;
+        Vector3 startingPos = transform.position;
+        Quaternion startingRot = transform.rotation;
+
+        while (elapsedTime < transitionDuration)
+        {
+            transform.position = Vector3.Lerp(startingPos, machineView.position, elapsedTime / transitionDuration);
+            transform.rotation = Quaternion.Lerp(startingRot, machineView.rotation, elapsedTime / transitionDuration);
+            elapsedTime += Time.deltaTime;
+            yield return null;
+        }
+
+        transform.position = machineView.position;
+        transform.rotation = machineView.rotation;
+        gameStarted.Invoke();
     }
 }

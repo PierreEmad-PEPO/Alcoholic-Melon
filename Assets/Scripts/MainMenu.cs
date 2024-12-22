@@ -7,13 +7,13 @@ public class MainMenu : MonoBehaviour
     void Start()=>Pause();
     
     public void PlayGame()
-    {   
+    {
+        Time.timeScale = 1f;
         CameraFocus.instance.StartGame();
         SoundManager.Instance.StopMainMenuMusic();
         SoundManager.Instance.PlayGameSound();
         SoundManager.Instance.PlayRandomNoise();
         gameObject.SetActive(false);
-        Time.timeScale = 1f;
         isPaused = false;
     }
 
