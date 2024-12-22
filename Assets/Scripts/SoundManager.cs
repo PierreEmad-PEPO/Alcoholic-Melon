@@ -2,18 +2,30 @@ using UnityEngine;
 
 public class SoundManager : MonoBehaviour
 {
-    private AudioSource audioSource;
-    [SerializeField]  AudioClip noise;
+    [SerializeField] private AudioClip noise;
+    [SerializeField] private AudioClip mainMenu;
+    [SerializeField] private AudioClip[] handleSounds;
 
-    private void Start()=>audioSource = GetComponent<AudioSource>();
+    public static SoundManager Instance { get; private set; }
+    private AudioSource audioSource;
+
+    private void Start()
+    {
+        if (Instance == null)
+            Instance = this;
+        else
+            Destroy(gameObject);
+        audioSource = GetComponent<AudioSource>();
+    }
     
-    public void playHandlesSound(GameObject tabRotation,AudioClip clip1, AudioClip clip2)
+    public void PlayHandlesSound(GameObject tapRotation,float maxRotDeg)
     {
-        if(tabRotation.transform.eulerAngles.x>45&& tabRotation.transform.eulerAngles.x < 46) audioSource.PlayOneShot(clip1);
-        if(tabRotation.transform.eulerAngles.x > 87 && tabRotation.transform.eulerAngles.x < 88) audioSource.PlayOneShot(clip2);
+        if (tapRotation.transform.localEulerAngles.x > maxRotDeg / 2 && tapRotation.transform.localEulerAngles.x < 47)
+            audioSource.PlayOneShot(handleSounds[0], 0.1f);
+        if (tapRotation.transform.localEulerAngles.x > 85 && tapRotation.transform.localEulerAngles.x < 90)
+            audioSource.PlayOneShot(handleSounds[1], 0.05f);
     }
-    public void playRandomNoise()
-    {
-        audioSource.PlayOneShot(noise, Random.Range(0f,0.9f));
-    }
+
+    public void PlayRandomNoise()=>audioSource.PlayOneShot(noise, Random.Range(0f,0.9f));
+    
 }

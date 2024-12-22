@@ -11,7 +11,6 @@ public class Tap : MonoBehaviour
     [SerializeField] private GameObject bubblesPrefab;
     [SerializeField] private Transform cupTransform;
     [SerializeField] private AudioSource audioSource;
-    [SerializeField] private AudioClip[] handleSounds;
     [SerializeField] private Cup cup;
     [SerializeField] private AudioClip noise;
 
@@ -58,10 +57,7 @@ public class Tap : MonoBehaviour
             }  
         }
         
-        if (transform.localEulerAngles.x > maxRotDeg / 2 && transform.localEulerAngles.x < 47) 
-            audioSource.PlayOneShot(handleSounds[0], 0.1f);
-        if (transform.localEulerAngles.x > 85 && transform.localEulerAngles.x < 90) 
-            audioSource.PlayOneShot(handleSounds[1], 0.05f);
+        SoundManager.Instance.PlayHandlesSound(gameObject, maxRotDeg);
 
         if (!isRotated && transform.localEulerAngles.x > minRotDeg)
         {
