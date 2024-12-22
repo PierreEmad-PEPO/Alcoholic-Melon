@@ -8,6 +8,7 @@ public class MainMenu : MonoBehaviour
     
     public void PlayGame()
     {   
+        CameraFocus.instance.StartGame();
         SoundManager.Instance.StopMainMenuMusic();
         SoundManager.Instance.PlayGameSound();
         SoundManager.Instance.PlayRandomNoise();
