@@ -37,7 +37,13 @@ public class Customer : MonoBehaviour
         {
             Events.OnplayerClickOncustomer.Invoke(Drink, this);
             once = true;
+            OutlineThePlayer();
         }
+    }
+
+    private void OutlineThePlayer()
+    {
+        var outline = gameObject.AddComponent<Outline>();
     }
 
     public void Judge(string text)
