@@ -50,7 +50,8 @@ public class CustomerGenerator : MonoBehaviour
     }
 
     private void AddTransfom(Transform t)=>customerStandPos.Add(t);
-    
+
+    //TODO: refine this method and add more drinks maybe change the percentage of the drinks and the way
     private void AddDrinks()
     {
         drinks = new Dictionary<DrinkName, Drink>();

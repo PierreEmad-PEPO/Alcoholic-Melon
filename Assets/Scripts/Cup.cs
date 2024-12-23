@@ -15,12 +15,10 @@ public class Cup : MonoBehaviour
 
     private float height;
     private int correct, wrong;
-
     private Dictionary<TapName, float> drinks;
-
     private CupColorManager colorManager;
-    public Vector3 CurrentPourPoint { get { return bottom.position + quantity/100 * height * bottom.up; } }
 
+    public Vector3 CurrentPourPoint { get { return bottom.position + quantity/100 * height * bottom.up; } }
     
     void Start()
     {
@@ -57,7 +55,6 @@ public class Cup : MonoBehaviour
     public void SetCurrentTap(Tap newTap)
     {
         currentTap = newTap;
-
         if (currentTap.RemainingPercentage > 0)
             checkArea.transform.position = CurrentPourPoint + bottom.up * currentTap.RemainingPercentage / 100 * height;
         else

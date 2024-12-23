@@ -6,11 +6,10 @@ public class CupColorManager : MonoBehaviour
     [SerializeField] private Tap redTap;
     [SerializeField] private Tap greenTap;
     [SerializeField] private Tap blueTap;
-
     [SerializeField] private Renderer cupRenderer;
+
     private Color currentColor;
     private Dictionary<Color, float> colorPullTimes = new Dictionary<Color, float>();
-
     private float lerpDuration = 1f;
 
     void Start()
@@ -41,13 +40,11 @@ public class CupColorManager : MonoBehaviour
         {
             foreach (var colorTime in colorPullTimes)
             {
-                Color targetColor = colorTime.Key;
-                float pullTime = colorTime.Value;
-
-                currentColor = Color.Lerp(currentColor, targetColor, (pullTime / totalPullTime) / lerpDuration);
+                Color targetColor =colorTime.Key;
+                float pullTime =colorTime.Value;
+                currentColor =Color.Lerp(currentColor, targetColor,(pullTime/totalPullTime)/lerpDuration);
             }
         }
-
         cupRenderer.material.color = currentColor;
 
         foreach (var key in new List<Color>(colorPullTimes.Keys))

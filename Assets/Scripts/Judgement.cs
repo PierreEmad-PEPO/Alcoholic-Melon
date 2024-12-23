@@ -20,7 +20,6 @@ public class Judgement : MonoBehaviour
         taps.Add(TapName.Tea, blueTap);
         taps.Add(TapName.Ale, redTap);
         taps.Add (TapName.Mead, greenTap);
-
         Events.OnplayerClickOncustomer.AddListener(InitTaps);
     }
 

@@ -22,11 +22,8 @@ public class CameraFocus : MonoBehaviour
             Destroy(gameObject);
     }
 
-    public void StartGame()
-    {
-        StartCoroutine(MoveCamera());
-    }
-
+    public void StartGame()=>StartCoroutine(MoveCamera());
+    
     private IEnumerator MoveCamera()
     {
         float elapsedTime = 0;
@@ -35,12 +32,11 @@ public class CameraFocus : MonoBehaviour
 
         while (elapsedTime < transitionDuration)
         {
-            transform.position = Vector3.Lerp(startingPos, machineView.position, elapsedTime / transitionDuration);
-            transform.rotation = Quaternion.Lerp(startingRot, machineView.rotation, elapsedTime / transitionDuration);
+            transform.position = Vector3.Lerp(startingPos, machineView.position,elapsedTime/transitionDuration);
+            transform.rotation = Quaternion.Lerp(startingRot,machineView.rotation,elapsedTime/transitionDuration);
             elapsedTime += Time.deltaTime;
             yield return null;
         }
-
         transform.position = machineView.position;
         transform.rotation = machineView.rotation;
         gameStarted.Invoke();

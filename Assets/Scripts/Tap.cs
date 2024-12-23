@@ -35,7 +35,7 @@ public class Tap : MonoBehaviour
         if (minRotDeg < 1) minRotDeg = 1;
         transform.localEulerAngles = new Vector3(minRotDeg, 0, 0);
     }
-
+    //TODO: decouple where the handles get lowered an goes back in order to easily reset it whenever needed
     private void Update()
     {
         if (isRotated && transform.localEulerAngles.x > minRotDeg)
