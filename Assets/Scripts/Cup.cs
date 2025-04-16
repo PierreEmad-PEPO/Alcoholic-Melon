@@ -4,6 +4,14 @@ using UnityEngine;
 
 public class Cup : MonoBehaviour
 {
+    // Constants for clarity and maintainability
+    private const float MaxQuantity = 100f;
+    private const float OverflowThreshold = 10f;
+    private const float ClippingOffset = 0.02f;
+    private const float GizmoSizeX = 0.1f;
+    private const float GizmoSizeY = 0.005f;
+    private const float GizmoSizeZ = 0.1f;
+
     [SerializeField] private GameObject checkArea;
     [SerializeField] private float fillingSpeed;
     [SerializeField] private Transform top, bottom;
@@ -18,8 +26,8 @@ public class Cup : MonoBehaviour
     private Dictionary<TapName, float> drinks;
     private CupColorManager colorManager;
 
-    public Vector3 CurrentPourPoint { get { return bottom.position + quantity/100 * height * bottom.up; } }
-    
+    public Vector3 CurrentPourPoint => bottom.position + quantity / MaxQuantity * height * bottom.up;
+
     void Start()
     {
         colorManager = FindObjectOfType<CupColorManager>();
@@ -31,40 +39,52 @@ public class Cup : MonoBehaviour
 
     void Update()
     {
-        if (currentTap.IsPouring)
+        if (currentTap != null && currentTap.IsPouring)
         {
-            quantity += currentTap.PourValue/100 * fillingSpeed * Time.deltaTime;
-            if (quantity > 100f) quantityOverflow += quantity - 100f;
-            currentTap.RemainingPercentage -= currentTap.PourValue / 100 * fillingSpeed * Time.deltaTime;
-            quantity = Mathf.Clamp(quantity, 0, 100);
-
-            liquidRend.material.SetVector("_ClippingPosition", CurrentPourPoint - bottom.up * 0.02f);
-            colorManager.StartPour(currentTap.color, currentTap.PourValue);
-
-            AddDrink(currentTap.tag, currentTap.PourValue / 100 * fillingSpeed * Time.deltaTime);
+            HandlePouring();
         }
-        else colorManager.StopPour(currentTap.color);
+        else
+        {
+            colorManager.StopPour(currentTap?.color);
+        }
 
-        if ((quantity >= 100 && !currentTap.IsPouring) || quantityOverflow > 10)
+        if ((quantity >= MaxQuantity && (currentTap == null || !currentTap.IsPouring)) || quantityOverflow > OverflowThreshold)
         {
             quantity += quantityOverflow;
             StartCoroutine(ResetCup());
         }
     }
 
+    private void HandlePouring()
+    {
+        quantity += currentTap.PourValue / MaxQuantity * fillingSpeed * Time.deltaTime;
+        if (quantity > MaxQuantity) quantityOverflow += quantity - MaxQuantity;
+        currentTap.RemainingPercentage -= currentTap.PourValue / MaxQuantity * fillingSpeed * Time.deltaTime;
+        quantity = Mathf.Clamp(quantity, 0, MaxQuantity);
+
+        liquidRend.material.SetVector("_ClippingPosition", CurrentPourPoint - bottom.up * ClippingOffset);
+        colorManager.StartPour(currentTap.color, currentTap.PourValue);
+
+        AddDrink(currentTap.tag, currentTap.PourValue / MaxQuantity * fillingSpeed * Time.deltaTime);
+    }
+
     public void SetCurrentTap(Tap newTap)
     {
         currentTap = newTap;
-        if (currentTap.RemainingPercentage > 0)
-            checkArea.transform.position = CurrentPourPoint + bottom.up * currentTap.RemainingPercentage / 100 * height;
+        if (currentTap != null && currentTap.RemainingPercentage > 0)
+        {
+            checkArea.transform.position = CurrentPourPoint + bottom.up * currentTap.RemainingPercentage / MaxQuantity * height;
+        }
         else
-            checkArea.transform.position = Vector3.one * 1000;    
+        {
+            checkArea.transform.position = Vector3.one * 1000;
+        }
     }
 
     public void CheckCurrentFlow()
     {
-        Collider[] colliders = Physics.OverlapBox(CurrentPourPoint - bottom.up * 0.02f, new Vector3(0.1f, 0.005f, 0.1f));
-        foreach (Collider collider in colliders) 
+        Collider[] colliders = Physics.OverlapBox(CurrentPourPoint - bottom.up * ClippingOffset, new Vector3(GizmoSizeX, GizmoSizeY, GizmoSizeZ));
+        foreach (Collider collider in colliders)
         {
             if (collider.gameObject.name.Equals("target"))
             {
@@ -87,14 +107,14 @@ public class Cup : MonoBehaviour
     {
         Debug.Log("Correct");
         correct++;
-        //play music
+        // Play music or feedback
     }
 
     private void WrongHit()
     {
         Debug.Log("Wrong");
         wrong++;
-        //play music
+        // Play music or feedback
     }
 
     public void UpdateCurrentTap()
@@ -103,29 +123,19 @@ public class Cup : MonoBehaviour
         SetCurrentTap(currentTap);
     }
 
-    public void AddDrink(string s, float per)
+    public void AddDrink(string tag, float amount)
     {
-        switch (s)
+        if (Enum.TryParse(tag, out TapName tapName))
         {
-            case "Red":
-                if (!drinks.ContainsKey(TapName.Ale))
-                    drinks.Add(TapName.Ale, 0);
-                drinks[TapName.Ale] += per;
-                break;
-            case "Green":
-                if (!drinks.ContainsKey(TapName.Mead))
-                    drinks.Add(TapName.Mead, 0);
-                drinks[TapName.Mead] += per;
-                break;
-            case "Blue":
-                if (!drinks.ContainsKey(TapName.Tea))
-                    drinks.Add(TapName.Tea, 0);
-                drinks[TapName.Tea] += per;
-                break;
+            if (!drinks.ContainsKey(tapName))
+            {
+                drinks[tapName] = 0;
+            }
+            drinks[tapName] += amount;
         }
     }
 
-    IEnumerator ResetCup()
+    private IEnumerator ResetCup()
     {
         judgement.Judge(correct, wrong);
         quantity = 0;
@@ -139,7 +149,7 @@ public class Cup : MonoBehaviour
 
     void OnDrawGizmos()
     {
-        Gizmos.color = UnityEngine.Color.red;
-        Gizmos.DrawWireCube(CurrentPourPoint - bottom.up * 0.02f, new Vector3(0.1f, 0.005f, 0.1f));
+        Gizmos.color = Color.red;
+        Gizmos.DrawWireCube(CurrentPourPoint - bottom.up * ClippingOffset, new Vector3(GizmoSizeX, GizmoSizeY, GizmoSizeZ));
     }
 }

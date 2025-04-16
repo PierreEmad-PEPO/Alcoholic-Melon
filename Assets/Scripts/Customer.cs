@@ -6,127 +6,136 @@ using UnityEngine.UI;
 
 public class Customer : MonoBehaviour
 {
-    [SerializeField] private float moveSpeed = 2;
-    [SerializeField] private float rotateSpeed = 45;
-    [SerializeField] private GameObject canves;
+    // Constants for clarity and maintainability
+    private const float DefaultMoveSpeed = 2f;
+    private const float DefaultRotateSpeed = 45f;
+    private const float ArrivalThreshold = 0.01f;
+    private const float RotationAngle = 180f;
+    private const float ForwardDistance = 10f;
+    private const float WaitTime = 3f;
+
+    [SerializeField] private float moveSpeed = DefaultMoveSpeed;
+    [SerializeField] private float rotateSpeed = DefaultRotateSpeed;
+    [SerializeField] private GameObject canvas;
     [SerializeField] private Text text;
 
-    private Transform tagetTransform;
-    private Vector3 tagetPos;
-    private Quaternion tagetRotationl;
+    private Transform targetTransform;
+    private Vector3 targetPosition;
+    private Quaternion targetRotation;
     private Drink drink;
     private string firstSentence = "";
     private string secondSentence = "";
-    private bool isNotArrive = false;
-    private bool isRotate = false;
-    private bool once = false;
+    private bool isMoving = false;
+    private bool isRotating = false;
+    private bool hasInteracted = false;
 
-    Action actionAfterArrived;
+    private Action actionAfterArrival;
 
-    public Drink Drink { get { return drink; } }
+    public Drink Drink => drink;
 
     private void Update()
     {
-        MoveTo();
-        Rotate();
+        HandleMovement();
+        HandleRotation();
     }
 
     private void OnMouseDown()
     {
-        if (!once)
+        if (!hasInteracted)
         {
-            Events.OnplayerClickOncustomer.Invoke(Drink, this);
-            once = true;
-            OutlineThePlayer();
+            Events.OnplayerClickOncustomer?.Invoke(Drink, this);
+            hasInteracted = true;
+            AddOutline();
         }
     }
 
-    private void OutlineThePlayer()
+    private void AddOutline()
     {
-        var outline = gameObject.AddComponent<Outline>();
+        if (gameObject.GetComponent<Outline>() == null)
+        {
+            gameObject.AddComponent<Outline>();
+        }
     }
 
-    public void Judge(string text)
+    public void Judge(string resultText)
     {
-        this.text.text = text;
-        StartCoroutine(Wait());
+        text.text = resultText;
+        StartCoroutine(WaitBeforeRotation());
     }
 
-    private IEnumerator Wait()
+    private IEnumerator WaitBeforeRotation()
     {
-        yield return new WaitForSeconds(3);
+        yield return new WaitForSeconds(WaitTime);
         StartRotation();
     }
 
     private void StartRotation()
     {
-        tagetRotationl = transform.rotation;
-        tagetRotationl.eulerAngles += (Vector3.up * 180);
-        canves.SetActive(false);
-        isRotate = true;
+        targetRotation = transform.rotation;
+        targetRotation.eulerAngles += Vector3.up * RotationAngle;
+        canvas.SetActive(false);
+        isRotating = true;
     }
 
-    private void MoveTo()
+    private void HandleMovement()
     {
-        if (isNotArrive)
+        if (isMoving)
         {
-            transform.position = Vector3.MoveTowards(transform.position,
-                    tagetPos, moveSpeed * Time.deltaTime);
-            if (Vector3.Distance(transform.position, tagetPos) < .01f)
+            transform.position = Vector3.MoveTowards(transform.position, targetPosition, moveSpeed * Time.deltaTime);
+            if (Vector3.Distance(transform.position, targetPosition) < ArrivalThreshold)
             {
-                transform.position = tagetPos;
-                isNotArrive = false;
-                actionAfterArrived?.Invoke();
-                actionAfterArrived = null;
+                transform.position = targetPosition;
+                isMoving = false;
+                actionAfterArrival?.Invoke();
+                actionAfterArrival = null;
             }
         }
     }
 
-    private void Rotate()
+    private void HandleRotation()
     {
-        if (isRotate)
+        if (isRotating)
         {
-            transform.rotation = Quaternion.RotateTowards(transform.rotation,
-                tagetRotationl, rotateSpeed * Time.deltaTime);
-            if (Quaternion.Angle(transform.rotation, tagetRotationl) < .1f)
+            transform.rotation = Quaternion.RotateTowards(transform.rotation, targetRotation, rotateSpeed * Time.deltaTime);
+            if (Quaternion.Angle(transform.rotation, targetRotation) < ArrivalThreshold)
             {
-                transform.rotation = tagetRotationl;
-                isRotate = false;
-                tagetPos = transform.position + (transform.forward * 10);
-                isNotArrive = true;
-                actionAfterArrived = DestroyCustomer;
-
+                transform.rotation = targetRotation;
+                isRotating = false;
+                targetPosition = transform.position + transform.forward * ForwardDistance;
+                isMoving = true;
+                actionAfterArrival = DestroyCustomer;
             }
-
         }
     }
 
     private void ShowCanvas()
     {
+        if (drink == null) return;
+
         text.text = firstSentence + drink.name + "\n";
         text.text += secondSentence + "\n";
-        foreach (KeyValuePair<TapName, float> valuePair in drink.ingredients)
+        foreach (KeyValuePair<TapName, float> ingredient in drink.ingredients)
         {
-            text.text += valuePair.Key.ToString() + ", ";
+            text.text += ingredient.Key + ", ";
         }
-        text.text = text.text.Remove(text.text.Length - 2, 2);
-        canves.SetActive(true);
+        text.text = text.text.TrimEnd(',', ' ');
+        canvas.SetActive(true);
     }
 
     private void DestroyCustomer()
     {
-        Events.onCustomerGoen.Invoke(tagetTransform);
+        Events.onCustomerGoen?.Invoke(targetTransform);
         Destroy(gameObject);
     }
 
-    public void InitCustomer(Transform _tagetPos, Drink _drink, string _firstSen, string _secSen)
+    public void InitCustomer(Transform target, Drink assignedDrink, string firstLine, string secondLine)
     {
-        tagetTransform = _tagetPos;
-        tagetPos = _tagetPos.position;
-        drink = _drink;
-        firstSentence = _firstSen;
-        secondSentence = _secSen;
-        isNotArrive = true;
-        actionAfterArrived = ShowCanvas;
+        targetTransform = target;
+        targetPosition = target.position;
+        drink = assignedDrink;
+        firstSentence = firstLine;
+        secondSentence = secondLine;
+        isMoving = true;
+        actionAfterArrival = ShowCanvas;
     }
 }
